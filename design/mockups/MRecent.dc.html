@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #F6F5F1; }
+.app {
+  font-family: 'Geist', -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  --bg: #F6F5F1; --surface: #FFFFFF; --surface-2: #EFEEE9;
+  --border: #E6E4DE; --border-2: #D8D5CD;
+  --text: #1B1A17; --text-2: #6E6A62; --text-3: #9B978E;
+  --primary: #171614; --on-primary: #FFFFFF;
+  --accent: #2E64C8; --accent-soft: #E4ECFA; --accent-text: #1F4F9E;
+  --ok: #3B7A45; --ok-soft: #E6F1E7;
+  --warn: #956400; --warn-soft: #FBF3DB;
+  --danger: #B3362F; --danger-soft: #FBE9E7; --on-danger: #FFFFFF;
+  --folder-a: #DCE7F8; --folder-b: #C6D8F4; --folder-line: #3F6BB8;
+  --seg-1: #9DB9EA; --seg-2: #9FCBA6; --seg-3: #E8CD82; --seg-4: #C9C6BE;
+  --shadow: 0 8px 24px rgba(27, 26, 23, 0.08);
+}
+.app[data-theme="dark"] {
+  --bg: #151412; --surface: #1C1B18; --surface-2: #252420;
+  --border: #2C2B26; --border-2: #3A3832;
+  --text: #ECEAE4; --text-2: #A19D94; --text-3: #726F67;
+  --primary: #ECEAE4; --on-primary: #151412;
+  --accent: #6F9BE8; --accent-soft: #1F2E4A; --accent-text: #A9C4F2;
+  --ok: #7FC48A; --ok-soft: #1D3122;
+  --warn: #E0B25A; --warn-soft: #382E16;
+  --danger: #E27A72; --danger-soft: #3A201E; --on-danger: #1A0F0E;
+  --folder-a: #25355A; --folder-b: #2F457A; --folder-line: #7FA3E6;
+  --seg-1: #4F76BF; --seg-2: #4E8C5A; --seg-3: #A88A3A; --seg-4: #5A5850;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mono { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { display: block; }
+.trunc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+kbd { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; background: var(--surface-2); color: var(--text-3); }
+</style>
+</helmet>
+<div class="app" data-theme="{{theme}}" style="width:390px;height:844px;overflow:hidden;background:var(--bg);color:var(--text);display:flex;flex-direction:column;position:relative;">
+<div style="height:54px;flex:none"></div>
+<div style="height:52px;flex:none;display:flex;align-items:center;padding:0 8px 0 20px">
+  
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <div class="trunc" style="font-size:17px;font-weight:600;letter-spacing:-0.01em">Recent</div>
+    <div class="trunc mono" style="font-size:11px;color:var(--text-3)">Recently modified · indexed 2 min ago</div>
+  </div>
+  <div style="display:flex"><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--text-2)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></span></div></div>
+</div>
+<div style="flex:1;min-height:0;overflow:hidden;background:var(--surface)">
+  
+  <div style="padding:14px 16px 6px;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Today</div>
+  
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="13" rx="1.5"/><path d="M4 16l4.5-4.5 3.5 3.5 3-3 5 5"/><circle cx="15.5" cy="9.5" r="1.2" fill="currentColor" stroke="none"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">store-front.jpg</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Product Photos</span></div>
+    <span style="font-size:12px;color:var(--text-3)">17:32</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="1.5"/><path d="M4 10h16M4 14.5h16M10 5v14"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">sales-report-aug-2026.xlsx</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Reports</span></div>
+    <span style="font-size:12px;color:var(--text-3)">09:14</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="4" rx="1"/><path d="M5 9v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 12.5h4"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">pos-backup-2026-09-04.tar.gz</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Backups</span></div>
+    <span style="font-size:12px;color:var(--text-3)">02:00</span>
+  </div>
+  <div style="padding:14px 16px 6px;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Yesterday</div>
+  
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="13" rx="1.5"/><path d="M4 16l4.5-4.5 3.5 3.5 3-3 5 5"/><circle cx="15.5" cy="9.5" r="1.2" fill="currentColor" stroke="none"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">banner-autumn.png</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Product Photos/2026-09</span></div>
+    <span style="font-size:12px;color:var(--text-3)">16:05</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 16.5h6"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">opening-checklist.docx</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Staff Docs</span></div>
+    <span style="font-size:12px;color:var(--text-3)">09:41</span>
+  </div>
+  <div style="padding:14px 16px 6px;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Earlier this week</div>
+  
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 16.5h6"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">menu-board-v3.pdf</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Reports</span></div>
+    <span style="font-size:12px;color:var(--text-3)">Mon 11:05</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6.5" width="12" height="11" rx="1.5"/><path d="M15.5 10.5l5-2.5v8l-5-2.5"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">promo-loop.mp4</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Product Photos</span></div>
+    <span style="font-size:12px;color:var(--text-3)">Mon 15:40</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--border)">
+    <span class="ico" style="width:24px;height:24px;color:var(--text-2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="4" rx="1"/><path d="M5 9v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 12.5h4"/></svg></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span class="trunc" style="font-size:15px">supplier-contracts.zip</span><span class="trunc mono" style="font-size:11px;color:var(--text-3)">/Backups</span></div>
+    <span style="font-size:12px;color:var(--text-3)">Sun 10:22</span>
+  </div>
+</div>
+<div style="flex:none;height:84px;border-top:1px solid var(--border);background:var(--surface);display:flex;padding:6px 8px 34px"><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg></span><span style="font-size:10px;font-weight:500">Files</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.5 2"/></svg></span><span style="font-size:10px;font-weight:500">Recent</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20V5M4 9l4-4 4 4M16 4v15M12 15l4 4 4-4"/></svg></span><span style="font-size:10px;font-weight:500">Transfers</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span><span style="font-size:10px;font-weight:500">Settings</span></div></div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":true,"section":"Theme"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark;
+    if (dark === undefined || dark === null) dark = true;
+    return { theme: dark ? 'dark' : 'light' };
+  }
+}
+</script>
+</body>
+</html>

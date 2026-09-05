@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #F6F5F1; }
+.app {
+  font-family: 'Geist', -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  --bg: #F6F5F1; --surface: #FFFFFF; --surface-2: #EFEEE9;
+  --border: #E6E4DE; --border-2: #D8D5CD;
+  --text: #1B1A17; --text-2: #6E6A62; --text-3: #9B978E;
+  --primary: #171614; --on-primary: #FFFFFF;
+  --accent: #2E64C8; --accent-soft: #E4ECFA; --accent-text: #1F4F9E;
+  --ok: #3B7A45; --ok-soft: #E6F1E7;
+  --warn: #956400; --warn-soft: #FBF3DB;
+  --danger: #B3362F; --danger-soft: #FBE9E7; --on-danger: #FFFFFF;
+  --folder-a: #DCE7F8; --folder-b: #C6D8F4; --folder-line: #3F6BB8;
+  --seg-1: #9DB9EA; --seg-2: #9FCBA6; --seg-3: #E8CD82; --seg-4: #C9C6BE;
+  --shadow: 0 8px 24px rgba(27, 26, 23, 0.08);
+}
+.app[data-theme="dark"] {
+  --bg: #151412; --surface: #1C1B18; --surface-2: #252420;
+  --border: #2C2B26; --border-2: #3A3832;
+  --text: #ECEAE4; --text-2: #A19D94; --text-3: #726F67;
+  --primary: #ECEAE4; --on-primary: #151412;
+  --accent: #6F9BE8; --accent-soft: #1F2E4A; --accent-text: #A9C4F2;
+  --ok: #7FC48A; --ok-soft: #1D3122;
+  --warn: #E0B25A; --warn-soft: #382E16;
+  --danger: #E27A72; --danger-soft: #3A201E; --on-danger: #1A0F0E;
+  --folder-a: #25355A; --folder-b: #2F457A; --folder-line: #7FA3E6;
+  --seg-1: #4F76BF; --seg-2: #4E8C5A; --seg-3: #A88A3A; --seg-4: #5A5850;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mono { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { display: block; }
+.trunc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+kbd { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; background: var(--surface-2); color: var(--text-3); }
+</style>
+</helmet>
+<div class="app" data-theme="{{theme}}" style="width:1280px;height:800px;overflow:hidden;background:var(--bg);color:var(--text);display:block;">
+<div style="display:flex;flex-direction:column;gap:28px;padding:24px 32px">
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Window controls · Windows only</div><div style="display:grid;grid-template-columns:repeat(4, 240px);gap:24px">
+  
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="width:240px;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border:1px solid var(--border);border-radius:8px 8px 0 0;background:var(--bg)"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FF5F57;box-shadow:inset 0 0 0 0.5px #E0443E;color:#4D0000"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px #DEA123;color:#995700"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#28C840;box-shadow:inset 0 0 0 0.5px #1AAB29;color:#006500"></span></div><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;border:0;background:transparent;color:var(--text-2);cursor:default;padding:0">
+<span style="position:relative;display:inline-flex">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4.5" width="18" height="15" rx="3"/>
+    <path d="M9.5 4.5v15"/>
+    <rect x="3" y="4.5" width="6.5" height="15" rx="3" fill="currentColor" stroke="none" opacity="0.35"/>
+  </svg>
+  
+</span></button></div>
+  <div style="height:64px;display:flex;align-items:center;padding-left:16px"><div style="transform:scale(3);transform-origin:left center"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FF5F57;box-shadow:inset 0 0 0 0.5px #E0443E;color:#4D0000"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px #DEA123;color:#995700"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#28C840;box-shadow:inset 0 0 0 0.5px #1AAB29;color:#006500"></span></div></div></div>
+  <div style="font-size:12px;font-weight:500">Idle</div><div style="font-size:12px;color:var(--text-3);line-height:1.4">Plain dots, like macOS. The whole 52 px row drags the window.</div>
+</div>
+  
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="width:240px;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border:1px solid var(--border);border-radius:8px 8px 0 0;background:var(--bg)"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FF5F57;box-shadow:inset 0 0 0 0.5px #E0443E;color:#4D0000"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3.6 3.6l4.8 4.8M8.4 3.6l-4.8 4.8"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px #DEA123;color:#995700"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.8 6h6.4"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#28C840;box-shadow:inset 0 0 0 0.5px #1AAB29;color:#006500"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.8 2.8h3.4L2.8 6.2zM9.2 9.2H5.8L9.2 5.8z" fill="currentColor" stroke="none"/></svg></span></div><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;border:0;background:transparent;color:var(--text-2);cursor:default;padding:0">
+<span style="position:relative;display:inline-flex">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4.5" width="18" height="15" rx="3"/>
+    <path d="M9.5 4.5v15"/>
+    <rect x="3" y="4.5" width="6.5" height="15" rx="3" fill="currentColor" stroke="none" opacity="0.35"/>
+  </svg>
+  
+</span></button></div>
+  <div style="height:64px;display:flex;align-items:center;padding-left:16px"><div style="transform:scale(3);transform-origin:left center"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FF5F57;box-shadow:inset 0 0 0 0.5px #E0443E;color:#4D0000"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3.6 3.6l4.8 4.8M8.4 3.6l-4.8 4.8"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px #DEA123;color:#995700"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.8 6h6.4"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#28C840;box-shadow:inset 0 0 0 0.5px #1AAB29;color:#006500"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.8 2.8h3.4L2.8 6.2zM9.2 9.2H5.8L9.2 5.8z" fill="currentColor" stroke="none"/></svg></span></div></div></div>
+  <div style="font-size:12px;font-weight:500">Hover</div><div style="font-size:12px;color:var(--text-3);line-height:1.4">Glyphs appear on all three while the pointer is over any of them.</div>
+</div>
+  
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="width:240px;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border:1px solid var(--border);border-radius:8px 8px 0 0;background:var(--bg)"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FF5F57;box-shadow:inset 0 0 0 0.5px #E0443E;color:#4D0000"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3.6 3.6l4.8 4.8M8.4 3.6l-4.8 4.8"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px #DEA123;color:#995700"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.8 6h6.4"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#28C840;box-shadow:inset 0 0 0 0.5px #1AAB29;color:#006500"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.4 6.2h3.8V2.4zM9.6 5.8H5.8v3.8z" fill="currentColor" stroke="none"/></svg></span></div><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;border:0;background:transparent;color:var(--text-2);cursor:default;padding:0">
+<span style="position:relative;display:inline-flex">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4.5" width="18" height="15" rx="3"/>
+    <path d="M9.5 4.5v15"/>
+    <rect x="3" y="4.5" width="6.5" height="15" rx="3" fill="currentColor" stroke="none" opacity="0.35"/>
+  </svg>
+  
+</span></button></div>
+  <div style="height:64px;display:flex;align-items:center;padding-left:16px"><div style="transform:scale(3);transform-origin:left center"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FF5F57;box-shadow:inset 0 0 0 0.5px #E0443E;color:#4D0000"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3.6 3.6l4.8 4.8M8.4 3.6l-4.8 4.8"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px #DEA123;color:#995700"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.8 6h6.4"/></svg></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#28C840;box-shadow:inset 0 0 0 0.5px #1AAB29;color:#006500"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2.4 6.2h3.8V2.4zM9.6 5.8H5.8v3.8z" fill="currentColor" stroke="none"/></svg></span></div></div></div>
+  <div style="font-size:12px;font-weight:500">Maximized · hover</div><div style="font-size:12px;color:var(--text-3);line-height:1.4">Green shows the restore glyph instead of zoom.</div>
+</div>
+  
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="width:240px;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border:1px solid var(--border);border-radius:8px 8px 0 0;background:var(--bg)"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--border-2);box-shadow:none;color:#4D0000"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--border-2);box-shadow:none;color:#995700"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--border-2);box-shadow:none;color:#006500"></span></div><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;border:0;background:transparent;color:var(--text-2);cursor:default;padding:0">
+<span style="position:relative;display:inline-flex">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4.5" width="18" height="15" rx="3"/>
+    <path d="M9.5 4.5v15"/>
+    <rect x="3" y="4.5" width="6.5" height="15" rx="3" fill="currentColor" stroke="none" opacity="0.35"/>
+  </svg>
+  
+</span></button></div>
+  <div style="height:64px;display:flex;align-items:center;padding-left:16px"><div style="transform:scale(3);transform-origin:left center"><div style="display:flex;gap:8px;align-items:center"><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--border-2);box-shadow:none;color:#4D0000"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--border-2);box-shadow:none;color:#995700"></span><span style="width:12px;height:12px;border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--border-2);box-shadow:none;color:#006500"></span></div></div></div>
+  <div style="font-size:12px;font-weight:500">Window inactive</div><div style="font-size:12px;color:var(--text-3);line-height:1.4">All three go grey when another window has focus.</div>
+</div>
+</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Frame</div><div style="display:flex;gap:24px">
+  
+<div style="display:flex;flex-direction:column;gap:8px;width:380px">
+  <div style="position:relative;width:380px;height:240px;border-radius:8px;overflow:hidden;background:radial-gradient(110% 90% at 18% 8%, #3C6EA8 0%, #223B63 40%, #121A2C 100%)">
+    <div style="position:absolute;left:26px;top:18px;right:26px;bottom:34px;border-radius:5px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);box-shadow:0 0 0 1px rgba(0,0,0,0.35),0 14px 32px rgba(0,0,0,0.45)">
+<div style="height:24px;flex:none;display:flex;align-items:center;gap:6px;padding:0 8px;background:#F3F3F3;color:#1B1B1B;font-size:10px;font-family:'Segoe UI Variable','Segoe UI',system-ui,sans-serif">
+  <span style="width:12px;height:12px;border-radius:3px;background:#1B1A17;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:8px">b</span>
+  <span>Soteria</span><span style="flex:1"></span>
+  <svg width="90" height="10" viewBox="0 0 90 10" fill="none" stroke="#1B1B1B" stroke-width="1"><path d="M10 5h10"/><rect x="40.5" y="0.5" width="9" height="9"/><path d="M71 1l8 8M79 1l-8 8"/></svg>
+</div>
+<div style="flex:1;display:flex;min-height:0;background:var(--surface)">
+  <div style="width:96px;flex:none;background:var(--bg);border-right:1px solid var(--border);display:flex;flex-direction:column">
+    <div style="height:22px;flex:none;margin:3px 4px 0;border:1px dashed var(--danger);border-radius:3px"></div>
+    <div style="display:flex;flex-direction:column;gap:5px;padding:6px 8px 0"><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div></div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column">
+    <div style="height:22px;border-bottom:1px solid var(--border)"></div>
+    <div style="padding:8px;display:flex;flex-direction:column;gap:5px"><div style="height:6px;width:70%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:62%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:54%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:46%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:38%;border-radius:3px;background:var(--surface-2)"></div></div>
+  </div>
+</div></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:18px;background:rgba(28,28,30,0.86)"></div>
+  </div>
+  <div style="font-size:12px;font-weight:500">Before · native caption</div><div style="font-size:12px;color:var(--text-3);line-height:1.4">Windows paints the bar in its own theme, not the app’s. The 52 px row under it sits empty.</div>
+</div>
+  
+<div style="display:flex;flex-direction:column;gap:8px;width:380px">
+  <div style="position:relative;width:380px;height:240px;border-radius:8px;overflow:hidden;background:radial-gradient(110% 90% at 18% 8%, #3C6EA8 0%, #223B63 40%, #121A2C 100%)">
+    <div style="position:absolute;left:26px;top:18px;right:26px;bottom:34px;border-radius:5px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);box-shadow:0 0 0 1px rgba(0,0,0,0.35),0 14px 32px rgba(0,0,0,0.45)">
+<div style="flex:1;display:flex;min-height:0;background:var(--surface)">
+  <div style="width:96px;flex:none;background:var(--bg);border-right:1px solid var(--border);display:flex;flex-direction:column">
+    <div style="height:22px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 8px"><span style="display:flex;gap:3px"><span style="width:5px;height:5px;border-radius:3px;background:#FF5F57"></span><span style="width:5px;height:5px;border-radius:3px;background:#FEBC2E"></span><span style="width:5px;height:5px;border-radius:3px;background:#28C840"></span></span><span style="width:10px;height:8px;border-radius:2px;border:1px solid var(--border-2)"></span></div>
+    <div style="display:flex;flex-direction:column;gap:5px;padding:6px 8px 0"><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div></div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column">
+    <div style="height:22px;border-bottom:1px solid var(--border)"></div>
+    <div style="padding:8px;display:flex;flex-direction:column;gap:5px"><div style="height:6px;width:70%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:62%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:54%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:46%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:38%;border-radius:3px;background:var(--surface-2)"></div></div>
+  </div>
+</div></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:18px;background:rgba(28,28,30,0.86)"></div>
+  </div>
+  <div style="font-size:12px;font-weight:500">After · frameless</div><div style="font-size:12px;color:var(--text-3);line-height:1.4">No caption. The row the sidebar already has becomes the title bar, lights at top-left like macOS.</div>
+</div>
+  
+<div style="display:flex;flex-direction:column;gap:8px;width:380px">
+  <div style="position:relative;width:380px;height:240px;border-radius:8px;overflow:hidden;background:radial-gradient(110% 90% at 18% 8%, #3C6EA8 0%, #223B63 40%, #121A2C 100%)">
+    <div style="position:absolute;inset:0 0 18px 0;border-radius:0;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);box-shadow:0 0 0 1px rgba(0,0,0,0.35),0 14px 32px rgba(0,0,0,0.45)">
+<div style="flex:1;display:flex;min-height:0;background:var(--surface)">
+  <div style="width:96px;flex:none;background:var(--bg);border-right:1px solid var(--border);display:flex;flex-direction:column">
+    <div style="height:22px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 8px"><span style="display:flex;gap:3px"><span style="width:5px;height:5px;border-radius:3px;background:#FF5F57"></span><span style="width:5px;height:5px;border-radius:3px;background:#FEBC2E"></span><span style="width:5px;height:5px;border-radius:3px;background:#28C840"></span></span><span style="width:10px;height:8px;border-radius:2px;border:1px solid var(--border-2)"></span></div>
+    <div style="display:flex;flex-direction:column;gap:5px;padding:6px 8px 0"><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div><div style="height:6px;border-radius:3px;background:var(--border-2)"></div></div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column">
+    <div style="height:22px;border-bottom:1px solid var(--border)"></div>
+    <div style="padding:8px;display:flex;flex-direction:column;gap:5px"><div style="height:6px;width:70%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:62%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:54%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:46%;border-radius:3px;background:var(--surface-2)"></div><div style="height:6px;width:38%;border-radius:3px;background:var(--surface-2)"></div></div>
+  </div>
+</div></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:18px;background:rgba(28,28,30,0.86)"></div>
+  </div>
+  <div style="font-size:12px;font-weight:500">Maximized</div><div style="font-size:12px;color:var(--text-3);line-height:1.4">Fills the work area with square corners. Green restores; double-clicking the row does the same.</div>
+</div>
+</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Behaviour</div><div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px 40px">
+  <div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:84px;font-weight:500;color:var(--text-2)">Buttons</span><span>Red closes, yellow minimizes, green maximizes and restores. Alt+F4 and Alt+Space keep working.</span></div>
+  <div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:84px;font-weight:500;color:var(--text-2)">Drag</span><span>The whole 52 px row moves the window. Double-click toggles maximize.</span></div>
+  <div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:84px;font-weight:500;color:var(--text-2)">Resize</span><span>8 px edge handles. Drag to a screen edge or press Win+Z to snap. The Snap Layouts flyout on hover is gone.</span></div>
+  <div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:84px;font-weight:500;color:var(--text-2)">Frame</span><span>Windows 11 draws the rounded corners and shadow. Windows 10 shows square corners.</span></div>
+  <div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:84px;font-weight:500;color:var(--text-2)">Geometry</span><span>Same as macOS: 12 px dots, 8 px apart, 20 px hit targets. Content starts at 76 px when the sidebar is hidden.</span></div>
+  <div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:84px;font-weight:500;color:var(--text-2)">Elsewhere</span><span>Taskbar and Alt-Tab title becomes “Soteria”. macOS keeps its native buttons; nothing changes there.</span></div>
+</div></div>
+</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":true,"section":"Theme"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark;
+    if (dark === undefined || dark === null) dark = true;
+    return { theme: dark ? 'dark' : 'light' };
+  }
+}
+</script>
+</body>
+</html>

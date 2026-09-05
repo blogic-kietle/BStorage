@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #F6F5F1; }
+.app {
+  font-family: 'Geist', -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  --bg: #F6F5F1; --surface: #FFFFFF; --surface-2: #EFEEE9;
+  --border: #E6E4DE; --border-2: #D8D5CD;
+  --text: #1B1A17; --text-2: #6E6A62; --text-3: #9B978E;
+  --primary: #171614; --on-primary: #FFFFFF;
+  --accent: #2E64C8; --accent-soft: #E4ECFA; --accent-text: #1F4F9E;
+  --ok: #3B7A45; --ok-soft: #E6F1E7;
+  --warn: #956400; --warn-soft: #FBF3DB;
+  --danger: #B3362F; --danger-soft: #FBE9E7; --on-danger: #FFFFFF;
+  --folder-a: #DCE7F8; --folder-b: #C6D8F4; --folder-line: #3F6BB8;
+  --seg-1: #9DB9EA; --seg-2: #9FCBA6; --seg-3: #E8CD82; --seg-4: #C9C6BE;
+  --shadow: 0 8px 24px rgba(27, 26, 23, 0.08);
+}
+.app[data-theme="dark"] {
+  --bg: #151412; --surface: #1C1B18; --surface-2: #252420;
+  --border: #2C2B26; --border-2: #3A3832;
+  --text: #ECEAE4; --text-2: #A19D94; --text-3: #726F67;
+  --primary: #ECEAE4; --on-primary: #151412;
+  --accent: #6F9BE8; --accent-soft: #1F2E4A; --accent-text: #A9C4F2;
+  --ok: #7FC48A; --ok-soft: #1D3122;
+  --warn: #E0B25A; --warn-soft: #382E16;
+  --danger: #E27A72; --danger-soft: #3A201E; --on-danger: #1A0F0E;
+  --folder-a: #25355A; --folder-b: #2F457A; --folder-line: #7FA3E6;
+  --seg-1: #4F76BF; --seg-2: #4E8C5A; --seg-3: #A88A3A; --seg-4: #5A5850;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mono { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { display: block; }
+.trunc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+kbd { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; background: var(--surface-2); color: var(--text-3); }
+</style>
+</helmet>
+<div class="app" data-theme="{{theme}}" style="width:1280px;height:800px;overflow:hidden;background:var(--bg);color:var(--text);display:flex;flex-direction:column;">
+
+<div style="height:52px;flex:none;display:flex;align-items:center;padding:0 16px">
+<div style="display:flex;gap:8px;align-items:center">
+  <span style="width:12px;height:12px;border-radius:6px;background:var(--border-2)"></span>
+  <span style="width:12px;height:12px;border-radius:6px;background:var(--border-2)"></span>
+  <span style="width:12px;height:12px;border-radius:6px;background:var(--border-2)"></span>
+</div></div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;padding-bottom:52px">
+  <div style="width:400px;display:flex;flex-direction:column;gap:24px">
+    <a href="#" style="display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--text-2)"><span class="ico" style="width:14px;height:14px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><span>Servers</span></a>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 style="margin:0;font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.2">Add a server</h1>
+      <p style="margin:0;color:var(--text-2);text-wrap:pretty">Any WebDAV server, such as SFTPGo or Nextcloud.</p>
+    </div>
+    
+    <div style="display:flex;flex-direction:column;gap:16px">
+      
+<div style="display:flex;flex-direction:column;gap:6px">
+  <label style="font-size:12px;font-weight:500;color:var(--text-2)">Server address</label>
+  <div style="display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:6px;background:var(--surface);border:1px solid var(--border-2);">
+    <span class="trunc mono" style="flex:1;font-size:13px;color:var(--text)">http://192.168.1.194:8081</span>
+  </div>
+  <div style="font-size:12px;color:var(--text-3)">Include the port. Use https:// when the server has TLS.</div>
+</div>
+      
+<div style="display:flex;flex-direction:column;gap:6px">
+  <label style="font-size:12px;font-weight:500;color:var(--text-2)">Username</label>
+  <div style="display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:6px;background:var(--surface);border:1px solid var(--border-2);">
+    <span class="trunc " style="flex:1;font-size:13px;color:var(--text)">pos</span>
+  </div>
+  
+</div>
+      
+<div style="display:flex;flex-direction:column;gap:6px">
+  <label style="font-size:12px;font-weight:500;color:var(--text-2)">Password</label>
+  <div style="display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:6px;background:var(--surface);border:1px solid var(--border-2);">
+    <span class="trunc " style="flex:1;font-size:13px;color:var(--text)">••••••••</span><span class="ico" style="width:15px;height:15px;color:var(--text-3)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+  </div>
+  
+</div>
+      <div style="display:flex;align-items:flex-start;gap:10px">
+        <span style="width:16px;height:16px;border-radius:4px;background:var(--primary);color:var(--on-primary);display:inline-flex;align-items:center;justify-content:center;flex:none"><span class="ico" style="width:11px;height:11px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span></span>
+        <div style="display:flex;flex-direction:column;gap:2px;margin-top:-2px">
+          <div>Remember me</div>
+          <div style="font-size:12px;color:var(--text-3)">Saved to the macOS Keychain.</div>
+        </div>
+      </div>
+    </div>
+    <button type="button" style="height:36px;padding:0 16px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;width:100%;background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);"><span>Sign in</span></button>
+  </div>
+</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark;
+    if (dark === undefined || dark === null) dark = false;
+    return { theme: dark ? 'dark' : 'light' };
+  }
+}
+</script>
+</body>
+</html>

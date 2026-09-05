@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Soteria
+Comment=A native desktop client for your self-hosted WebDAV storage.
+# The Exec line includes %u to pass the URL to the application
+Exec=/usr/local/bin/Soteria %u
+Terminal=false
+Type=Application
+Icon=Soteria
+Categories=Utility;
+StartupWMClass=Soteria
+
+ 

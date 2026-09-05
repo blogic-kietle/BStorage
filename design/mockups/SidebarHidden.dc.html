@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #F6F5F1; }
+.app {
+  font-family: 'Geist', -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  --bg: #F6F5F1; --surface: #FFFFFF; --surface-2: #EFEEE9;
+  --border: #E6E4DE; --border-2: #D8D5CD;
+  --text: #1B1A17; --text-2: #6E6A62; --text-3: #9B978E;
+  --primary: #171614; --on-primary: #FFFFFF;
+  --accent: #2E64C8; --accent-soft: #E4ECFA; --accent-text: #1F4F9E;
+  --ok: #3B7A45; --ok-soft: #E6F1E7;
+  --warn: #956400; --warn-soft: #FBF3DB;
+  --danger: #B3362F; --danger-soft: #FBE9E7; --on-danger: #FFFFFF;
+  --folder-a: #DCE7F8; --folder-b: #C6D8F4; --folder-line: #3F6BB8;
+  --seg-1: #9DB9EA; --seg-2: #9FCBA6; --seg-3: #E8CD82; --seg-4: #C9C6BE;
+  --shadow: 0 8px 24px rgba(27, 26, 23, 0.08);
+}
+.app[data-theme="dark"] {
+  --bg: #151412; --surface: #1C1B18; --surface-2: #252420;
+  --border: #2C2B26; --border-2: #3A3832;
+  --text: #ECEAE4; --text-2: #A19D94; --text-3: #726F67;
+  --primary: #ECEAE4; --on-primary: #151412;
+  --accent: #6F9BE8; --accent-soft: #1F2E4A; --accent-text: #A9C4F2;
+  --ok: #7FC48A; --ok-soft: #1D3122;
+  --warn: #E0B25A; --warn-soft: #382E16;
+  --danger: #E27A72; --danger-soft: #3A201E; --on-danger: #1A0F0E;
+  --folder-a: #25355A; --folder-b: #2F457A; --folder-line: #7FA3E6;
+  --seg-1: #4F76BF; --seg-2: #4E8C5A; --seg-3: #A88A3A; --seg-4: #5A5850;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mono { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { display: block; }
+.trunc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+kbd { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; background: var(--surface-2); color: var(--text-3); }
+</style>
+</helmet>
+<div class="app" data-theme="{{theme}}" style="width:1280px;height:800px;overflow:hidden;background:var(--bg);color:var(--text);display:flex;">
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--surface)">
+  
+<header style="height:52px;flex:none;display:flex;align-items:center;gap:12px;padding:0 20px 0 16px;border-bottom:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:14px;margin-right:4px">
+<div style="display:flex;gap:8px;align-items:center">
+  <span style="width:12px;height:12px;border-radius:6px;background:var(--border-2)"></span>
+  <span style="width:12px;height:12px;border-radius:6px;background:var(--border-2)"></span>
+  <span style="width:12px;height:12px;border-radius:6px;background:var(--border-2)"></span>
+</div><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;border:0;background:transparent;color:var(--text-2);cursor:default;padding:0">
+<span style="position:relative;display:inline-flex">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4.5" width="18" height="15" rx="3"/>
+    <path d="M9.5 4.5v15"/>
+    
+  </svg>
+  <span style="position:absolute;top:-2px;right:-3px;width:7px;height:7px;border-radius:4px;background:var(--accent);border:1.5px solid var(--bg)"></span>
+</span></button></div>
+  
+    <div style="display:flex;gap:2px"><button type="button" style="width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-2);"><span class="ico" style="width:16px;height:16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></button><button type="button" style="width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:16px;height:16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button></div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500">
+      <span style="color:var(--text)">Files</span>
+    </div>
+  <div style="flex:1"></div>
+  
+<div style="display:flex;align-items:center;gap:8px;width:220px;height:32px;padding:0 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface-2);color:var(--text-3)">
+  <span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span><span style="font-size:13px">Search</span>
+</div><button type="button" style="height:32px;padding:0 10px 0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--surface);color:var(--text);border:1px solid var(--border-2);cursor:default"><span class="ico" style="width:15px;height:15px;color:var(--text-2)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20V5M4 9l4-4 4 4M16 4v15M12 15l4 4 4-4"/></svg></span><span>Name</span><span class="ico" style="width:13px;height:13px;color:var(--text-3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+<div style="display:inline-flex;padding:2px;border:1px solid var(--border);border-radius:6px;gap:2px">
+  <span style="width:28px;height:26px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;background:var(--surface-2);color:var(--text)"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4.5" cy="18" r="1" fill="currentColor" stroke="none"/></svg></span></span><span style="width:28px;height:26px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:var(--text-3)"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1"/></svg></span></span>
+</div><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--surface);color:var(--text);border:1px solid var(--border-2);"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/><path d="M12 11v5M9.5 13.5h5"/></svg></span><span>New folder</span></button><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5M7 10l5-5 5 5M4 19.5h16"/></svg></span><span>Upload</span></button>
+</header>
+  
+<div style="flex:1;min-height:0;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column;gap:4px">
+  
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:34px;padding:0 8px 0 12px;font-size:12px;font-weight:500;color:var(--text-3)">
+  <div style="display:flex;align-items:center;gap:4px;color:var(--text-2)">Name <span class="ico" style="width:12px;height:12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+  <div>Kind</div>
+  <div style="text-align:right">Size</div>
+  <div>Modified</div>
+  <div>Created</div>
+  <div></div>
+</div>
+  
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--folder-line)" stroke-width="1.3" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-a)"/><path d="M3 11h18v6.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-b)"/></svg></span><span class="trunc">Backups</span></div>
+  <div style="font-size:12px;color:var(--text-3)">Folder</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">—</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 4, 2026 · 15:12</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--folder-line)" stroke-width="1.3" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-a)"/><path d="M3 11h18v6.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-b)"/></svg></span><span class="trunc">Product Photos</span></div>
+  <div style="font-size:12px;color:var(--text-3)">Folder</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">—</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 4, 2026 · 15:12</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--folder-line)" stroke-width="1.3" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-a)"/><path d="M3 11h18v6.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-b)"/></svg></span><span class="trunc">Receipts 2026</span></div>
+  <div style="font-size:12px;color:var(--text-3)">Folder</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">—</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 4, 2026 · 15:12</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--folder-line)" stroke-width="1.3" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-a)"/><path d="M3 11h18v6.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-b)"/></svg></span><span class="trunc">Reports</span></div>
+  <div style="font-size:12px;color:var(--text-3)">Folder</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">—</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 4, 2026 · 15:12</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--folder-line)" stroke-width="1.3" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-a)"/><path d="M3 11h18v6.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z" fill="var(--folder-b)"/></svg></span><span class="trunc">Staff Docs</span></div>
+  <div style="font-size:12px;color:var(--text-3)">Folder</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">—</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 4, 2026 · 15:12</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+  
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px;color:var(--text-2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="4" rx="1"/><path d="M5 9v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 12.5h4"/></svg></span><span class="trunc">pos-backup-2026-09-04.tar.gz</span></div>
+  <div style="font-size:12px;color:var(--text-3)">Archive</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">1.2 GB</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 4, 2026 · 02:00</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px;color:var(--text-2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="13" rx="1.5"/><path d="M4 16l4.5-4.5 3.5 3.5 3-3 5 5"/><circle cx="15.5" cy="9.5" r="1.2" fill="currentColor" stroke="none"/></svg></span><span class="trunc">store-front.jpg</span></div>
+  <div style="font-size:12px;color:var(--text-3)">JPEG image</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">3.4 MB</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 4, 2026 · 17:32</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px;color:var(--text-2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="1.5"/><path d="M4 10h16M4 14.5h16M10 5v14"/></svg></span><span class="trunc">sales-report-aug-2026.xlsx</span></div>
+  <div style="font-size:12px;color:var(--text-3)">Spreadsheet</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">218 KB</div>
+  <div style="font-size:12px;color:var(--text-2)">Sep 1, 2026 · 09:14</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px;color:var(--text-2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 16.5h6"/></svg></span><span class="trunc">menu-board-v3.pdf</span></div>
+  <div style="font-size:12px;color:var(--text-3)">PDF document</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">6.1 MB</div>
+  <div style="font-size:12px;color:var(--text-2)">Aug 28, 2026 · 11:05</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 90px 170px 170px 36px;align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="ico" style="width:18px;height:18px;color:var(--text-2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6.5" width="12" height="11" rx="1.5"/><path d="M15.5 10.5l5-2.5v8l-5-2.5"/></svg></span><span class="trunc">promo-loop.mp4</span></div>
+  <div style="font-size:12px;color:var(--text-3)">MPEG-4 video</div>
+  <div class="mono" style="font-size:12px;color:var(--text-2);text-align:right">412 MB</div>
+  <div style="font-size:12px;color:var(--text-2)">Aug 26, 2026 · 15:40</div>
+  <div style="font-size:12px;color:var(--text-2)">—</div>
+  <div style="display:flex;justify-content:flex-end"><button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:0;font:inherit;cursor:default;border:1px solid transparent;background:transparent;color:var(--text-3);opacity:0.6;"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span></button></div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":true,"section":"Theme"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark;
+    if (dark === undefined || dark === null) dark = true;
+    return { theme: dark ? 'dark' : 'light' };
+  }
+}
+</script>
+</body>
+</html>

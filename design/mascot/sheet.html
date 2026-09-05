@@ -1,0 +1,547 @@
+<title>Bo, the Soteria Gopher</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#F6F5F1;--surface:#FFFFFF;--surface-2:#EFEEE9;--border:#E6E4DE;--border-2:#D8D5CD;
+    --ink:#1B1A17;--ink-2:#6E6A62;--ink-3:#9B978E;--accent:#2E64C8;--accent-soft:#E4ECFA;--accent-text:#1F4F9E;--rule:#E6E4DE;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#151412;--surface:#1C1B18;--surface-2:#252420;--border:#2C2B26;--border-2:#3A3832;
+    --ink:#ECEAE4;--ink-2:#A19D94;--ink-3:#726F67;--accent:#6F9BE8;--accent-soft:#1F2E4A;--accent-text:#A9C4F2;--rule:#2C2B26;
+  }}
+  :root[data-theme="dark"]{
+    --paper:#151412;--surface:#1C1B18;--surface-2:#252420;--border:#2C2B26;--border-2:#3A3832;
+    --ink:#ECEAE4;--ink-2:#A19D94;--ink-3:#726F67;--accent:#6F9BE8;--accent-soft:#1F2E4A;--accent-text:#A9C4F2;--rule:#2C2B26;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Geist',-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1060px;margin:0 auto;padding:56px 28px 96px}
+  svg{display:block}
+
+  .eyebrow{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+  h1{margin:0;font-size:clamp(40px,6vw,68px);font-weight:600;letter-spacing:-.035em;line-height:.98;text-wrap:balance}
+  .lede{margin:0;max-width:56ch;color:var(--ink-2);font-size:15px}
+  .lede b{color:var(--ink);font-weight:500}
+
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:36px;align-items:center;margin-top:8px}
+  @media(max-width:760px){.hero{grid-template-columns:1fr}}
+  .hero .canvas{padding:22px}
+  .hero-copy{display:flex;flex-direction:column;gap:16px}
+
+  .canvas{background:#ECEAE3;border:1px solid #DCD8CE;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:16px}
+  .canvas svg{width:100%;height:auto}
+
+  .sec{margin-top:64px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .sec-head h2{margin:0;font-size:19px;font-weight:600;letter-spacing:-.015em}
+  .sec-head .n{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:11px;color:var(--ink-3)}
+  .sec-note{margin:0 0 24px;color:var(--ink-2);max-width:68ch;font-size:13.5px}
+  .sec-note b{color:var(--ink);font-weight:500}
+
+  .states{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  @media(max-width:900px){.states{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.states{grid-template-columns:1fr}}
+  .state{display:flex;flex-direction:column;gap:10px}
+  .state .canvas{padding:8px}
+  .state h3{margin:0;font-size:14px;font-weight:600;letter-spacing:-.01em}
+  .state .when{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:10.5px;color:var(--accent-text);letter-spacing:.02em}
+  .state p{margin:0;font-size:12.5px;color:var(--ink-2)}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:14px}
+  .card h3{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}
+  .card p{margin:0;font-size:13px;color:var(--ink-2)}
+
+  .ladder{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+  .rung{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .rung .mono{font-size:10.5px;color:var(--ink-3)}
+  .chip{background:#ECEAE3;border:1px solid #DCD8CE;display:grid;place-items:center;overflow:hidden}
+
+  .dockrow{display:flex;align-items:center;gap:18px;padding:14px 18px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;width:fit-content}
+
+  .lockups{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+  .lockups .canvas{padding:22px 26px}
+
+  .pal{display:flex;flex-wrap:wrap;gap:10px}
+  .sw{display:flex;flex-direction:column;gap:7px;width:100px}
+  .sw .chipc{height:52px;border-radius:8px;border:1px solid var(--border-2)}
+  .sw .lbl{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:10.5px;color:var(--ink-2)}
+  .sw .hex{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+
+  .rules{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+  .rules li{display:grid;grid-template-columns:16px 1fr;gap:10px;font-size:13px;color:var(--ink-2)}
+  .rules .y{color:#3B7A45;font-weight:600}
+  .rules .n2{color:#B3362F;font-weight:600}
+
+  table{border-collapse:collapse;width:100%;min-width:520px}
+  .tbl{border:1px solid var(--border);border-radius:10px;background:var(--surface);overflow-x:auto}
+  th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--rule);font-size:13px}
+  tr:last-child td{border-bottom:0}
+  th{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+  td.f{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:12px;color:var(--accent-text);white-space:nowrap}
+  td.d{font-family:'Geist Mono','SF Mono',Menlo,monospace;font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+  td.u{color:var(--ink-2)}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--rule);color:var(--ink-3);font-size:11.5px}
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">Soteria · identity · round two — final</div>
+  <div class="hero">
+    <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 188 106 188 130C188 154 158 178 120 178C82 178 52 154 52 130C52 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="78" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M71.7 205.1v6.3M78 206.9v6.3M84.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="162" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M155.7 205.1v6.3M162 206.9v6.3M168.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  </svg></div>
+    <div class="hero-copy">
+      <h1>Bo</h1>
+      <p class="lede">A gopher who keeps things in his cheeks. He is the face of <b>Soteria</b> — a Go desktop client that talks WebDAV to a server you run yourself — and he does two jobs: at 200 px he is a character, at 16 px he is a folder with ears.</p>
+      <p class="lede">The name is the <b>b</b> in Soteria. It is also, in Vietnamese, <b>ôm bo bo</b> — to hold onto something and refuse to let go. That is the whole product in two syllables.</p>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="sec-head"><span class="n">01</span><h2>Construction</h2></div>
+    <p class="sec-note">Built on a <b>12 × 12 grid of 20 px units</b>. The head and the pouches are <b>one outline</b>, not a head with two circles stuck to it — the pouches inflate the silhouette, and that changing silhouette is the whole recognition cue. Everything is one weight: <b>3 units at 240</b>, dropping to 2.4 for interior lines, so he sits beside the app's 1.6-stroke icon set without shouting.</p>
+    <div class="two">
+      <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  
+  <g stroke="#2E64C8" stroke-width=".5" opacity=".35">
+    <path d="M20 0v240M0 20h240"/><path d="M40 0v240M0 40h240"/><path d="M60 0v240M0 60h240"/><path d="M80 0v240M0 80h240"/><path d="M100 0v240M0 100h240"/><path d="M120 0v240M0 120h240"/><path d="M140 0v240M0 140h240"/><path d="M160 0v240M0 160h240"/><path d="M180 0v240M0 180h240"/><path d="M200 0v240M0 200h240"/><path d="M220 0v240M0 220h240"/>
+  </g>
+  
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 188 106 188 130C188 154 158 178 120 178C82 178 52 154 52 130C52 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="78" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M71.7 205.1v6.3M78 206.9v6.3M84.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="162" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M155.7 205.1v6.3M162 206.9v6.3M168.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  
+  <g stroke="#2E64C8" stroke-width="1.4" fill="none">
+    <path d="M52 34h136M52 30v8M188 30v8"/>
+    <path d="M34 48v190M30 48h8M30 238h8"/>
+    <path d="M190 130h34"/>
+  </g>
+  <g font-family="'Geist Mono', monospace" font-size="9.5" fill="#2E64C8">
+    <text x="120" y="26" text-anchor="middle">6.8u across the cheeks</text>
+    <text x="24" y="143" text-anchor="middle" transform="rotate(-90 24 143)">9.5u tall</text>
+    <text x="226" y="126" text-anchor="end">pouch</text>
+  </g></svg></div>
+      <div class="card">
+        <h3>Rules of the drawing</h3>
+        <ul class="rules">
+          <li><span class="y">✓</span><span>Flat fills, one ink outline, no gradients and no shadow — same discipline as the UI.</span></li>
+          <li><span class="y">✓</span><span>Almond eyes, never white ovals. Pupil only, with one highlight up and to the right.</span></li>
+          <li><span class="y">✓</span><span>One stroke for the mouth, corners below the middle. Bo sulks; he never grins, and he has no teeth.</span></li>
+          <li><span class="n2">✕</span><span>Ears stay small and sit on the side of the skull. Big round ears on top make him a bear.</span></li>
+          <li><span class="n2">✕</span><span>No extra colours on the fur. If Bo needs to say something, the thing he holds says it.</span></li>
+          <li><span class="n2">✕</span><span>Never rotate or shear him. He stands square; the props move.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="n">02</span><h2>Five states, five screens</h2></div>
+    <p class="sec-note">The pouches are the transfer queue, so Bo is not decoration — he is a status indicator you can read across a room. Each pose is tied to a real state the app already emits.</p>
+    <div class="states">
+      <div class="state">
+        <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 188 106 188 130C188 154 158 178 120 178C82 178 52 154 52 130C52 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="78" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M71.7 205.1v6.3M78 206.9v6.3M84.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="162" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M155.7 205.1v6.3M162 206.9v6.3M168.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  </svg></div>
+        <h3>Idle</h3>
+        <div class="when">Files, connected</div>
+        <p>Pouches at rest. The default Bo.</p>
+      </div><div class="state">
+        <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 202 106 202 130C202 154 158 178 120 178C82 178 38 154 38 130C38 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <g transform="rotate(-10 67 130)"><rect x="54.5" y="113.5" width="25" height="33" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M59.5 121.75h15M59.5 134.125h15" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g><g transform="rotate(10 173 130)"><rect x="160.5" y="113.5" width="25" height="33" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M165.5 121.75h15M165.5 134.125h15" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g>
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  <g><rect x="94" y="186" width="52" height="40" rx="5" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.4"/><path d="M102 198h36M102 206h36M102 214h26" fill="none" stroke="#3F6BB8" stroke-width="2.2" stroke-linecap="round"/></g>
+  <!-- forepaws + digging claws -->
+  <circle cx="92" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M85.7 205.1v6.3M92 206.9v6.3M98.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="148" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M141.7 205.1v6.3M148 206.9v6.3M154.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  </svg></div>
+        <h3>Carrying</h3>
+        <div class="when">Upload / download running</div>
+        <p>Pouches loaded, one more in his arms.</p>
+      </div><div class="state">
+        <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 218 106 218 130C218 154 158 178 120 178C82 178 22 154 22 130C22 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <g transform="rotate(-10 55 130)"><rect x="40.5" y="111" width="29" height="38" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M45.5 120.5h19M45.5 134.75h19" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g><g transform="rotate(10 185 130)"><rect x="170.5" y="111" width="29" height="38" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M175.5 120.5h19M175.5 134.75h19" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g>
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="74" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M67.7 205.1v6.3M74 206.9v6.3M80.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="166" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M159.7 205.1v6.3M166 206.9v6.3M172.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  </svg></div>
+        <h3>Stuffed</h3>
+        <div class="when">Queue backed up</div>
+        <p>Four in the cheeks. Comic, not alarming.</p>
+      </div><div class="state">
+        <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 178 106 178 130C178 154 158 178 120 178C82 178 62 154 62 130C62 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M94 188a6 6 0 0 1 6-6h16l7 8h37a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6h-60a6 6 0 0 1-6-6z" fill="none" stroke="#3F6BB8" stroke-width="2.4" stroke-linejoin="round" stroke-dasharray="6 7"/>
+  <!-- forepaws + digging claws -->
+  <circle cx="88" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M81.7 205.1v6.3M88 206.9v6.3M94.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="152" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M145.7 205.1v6.3M152 206.9v6.3M158.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  </svg></div>
+        <h3>Empty-handed</h3>
+        <div class="when">Empty folder</div>
+        <p>Deflated pouches, a folder with nothing in it.</p>
+      </div><div class="state">
+        <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 180 106 180 130C180 154 158 178 120 178C82 178 60 154 60 130C60 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <path d="M91 102q9 8 18 0" fill="none" stroke="#1B1A17" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M131 102q9 8 18 0" fill="none" stroke="#1B1A17" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="78" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M71.7 205.1v6.3M78 206.9v6.3M84.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="162" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M155.7 205.1v6.3M162 206.9v6.3M168.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <g fill="none" stroke="#3F6BB8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M192 46h13l-13 15h13"/>
+    <path d="M208 26h10l-10 11h10" opacity=".7"/>
+    <path d="M221 10h7l-7 8h7" opacity=".45"/>
+  </g></svg></div>
+        <h3>Asleep</h3>
+        <div class="when">Offline / reconnecting</div>
+        <p>Eyes shut until Ping() comes back.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="n">03</span><h2>The mark</h2></div>
+    <p class="sec-note">The app's own left-tab folder with Bo behind it. The face sits on the <b>front pocket</b> and the ears peek over its top edge — that edge runs straight across, so the ears stay symmetric even though the tab does not. Nothing here is invented: it is the folder from the file list, at icon scale. Below 24 px it swaps to a reduced cut with the muzzle and the highlights removed and the eyes carrying the whole face.</p>
+    <div class="two">
+      <div class="canvas"><svg viewBox="0 0 240 240" style="max-width:240px" aria-hidden="true">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+      <div class="card">
+        <h3>Size ladder</h3>
+        <p>Full cut down to 32 px, micro cut at 24 px and below.</p>
+        <div class="ladder">
+          <div class="rung"><span class="chip" style="width:96px;height:96px;border-radius:22px"><svg viewBox="0 0 240 240" width="94" height="94">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="mono">96</span></div>
+          <div class="rung"><span class="chip" style="width:64px;height:64px;border-radius:15px"><svg viewBox="0 0 240 240" width="62" height="62">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="mono">64</span></div>
+          <div class="rung"><span class="chip" style="width:32px;height:32px;border-radius:8px"><svg viewBox="0 0 240 240" width="30" height="30">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="mono">32</span></div>
+          <div class="rung"><span class="chip" style="width:24px;height:24px;border-radius:6px"><svg viewBox="0 0 240 240" width="22" height="22">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8"/>
+  <circle cx="72" cy="100" r="22" fill="#8E7A57"/>
+  <circle cx="168" cy="100" r="22" fill="#8E7A57"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4"/>
+  <circle cx="88" cy="148" r="13" fill="#1B1A17"/>
+  <circle cx="152" cy="148" r="13" fill="#1B1A17"/>
+</svg></span><span class="mono">24 ▾</span></div>
+          <div class="rung"><span class="chip" style="width:16px;height:16px;border-radius:4px"><svg viewBox="0 0 240 240" width="14" height="14">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8"/>
+  <circle cx="72" cy="100" r="22" fill="#8E7A57"/>
+  <circle cx="168" cy="100" r="22" fill="#8E7A57"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4"/>
+  <circle cx="88" cy="148" r="13" fill="#1B1A17"/>
+  <circle cx="152" cy="148" r="13" fill="#1B1A17"/>
+</svg></span><span class="mono">16 ▾</span></div>
+        </div>
+        <h3 style="margin-top:6px">In the Dock</h3>
+        <div class="dockrow">
+          <svg viewBox="0 0 1024 1024" width="72" height="72">
+  <rect width="1024" height="1024" rx="228" fill="#F6F5F1"/>
+  <g transform="translate(56 -9) scale(3.8)">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></g></svg>
+          <svg viewBox="0 0 1024 1024" width="48" height="48">
+  <rect width="1024" height="1024" rx="228" fill="#F6F5F1"/>
+  <g transform="translate(56 -9) scale(3.8)">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></g></svg>
+          <span class="mono" style="font-size:11px;color:var(--ink-3)">warm paper ground,<br>228 / 1024 corner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="n">04</span><h2>Lockups</h2></div>
+    <p class="sec-note">Geist 600 at −1.8 tracking, set in ink. Clear space on every side is <b>one ear</b> — the radius of the ear circle at whatever size the mark is drawn. The wordmark is always lowercase.</p>
+    <div class="lockups">
+      <div class="canvas" style="flex:1;min-width:280px"><svg viewBox="0 0 300 76" style="max-width:300px">
+  <g transform="translate(0 4) scale(0.3)">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></g>
+  <text x="92" y="55" font-family="Geist, -apple-system, 'Helvetica Neue', sans-serif" font-size="46" font-weight="600" letter-spacing="-1.8" fill="#1B1A17">Soteria</text></svg></div>
+      <div class="canvas"><svg viewBox="0 0 200 160" style="max-width:160px">
+  <g transform="translate(58 0) scale(0.42)">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/></g>
+  <text x="100" y="146" text-anchor="middle" font-family="Geist, -apple-system, 'Helvetica Neue', sans-serif" font-size="34" font-weight="600" letter-spacing="-1.3" fill="#1B1A17">Soteria</text></svg></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="n">05</span><h2>Palette</h2></div>
+    <p class="sec-note">Bo does not theme. Five constant colours for the animal himself, and everything he carries — file cards, the empty folder, the sleep marks — is drawn in the app's own <span class="mono">--folder-*</span> tokens rather than a colour of its own. In dark mode the app goes dark around him and he stays the same animal.</p>
+    <div class="pal">
+      <div class="sw"><div class="chipc" style="background:#C9B48F"></div><span class="lbl">fur</span><span class="hex">#C9B48F</span></div>
+      <div class="sw"><div class="chipc" style="background:#B39C74"></div><span class="lbl">body</span><span class="hex">#B39C74</span></div>
+      <div class="sw"><div class="chipc" style="background:#8E7A57"></div><span class="lbl">ears · paws</span><span class="hex">#8E7A57</span></div>
+      <div class="sw"><div class="chipc" style="background:#F1E8D8"></div><span class="lbl">belly · muzzle</span><span class="hex">#F1E8D8</span></div>
+      <div class="sw"><div class="chipc" style="background:#1B1A17"></div><span class="lbl">outline</span><span class="hex">#1B1A17</span></div>
+      <div class="sw"><div class="chipc" style="background:#DCE7F8"></div><span class="lbl">folder back</span><span class="hex">#DCE7F8</span></div>
+      <div class="sw"><div class="chipc" style="background:#C6D8F4"></div><span class="lbl">folder front</span><span class="hex">#C6D8F4</span></div>
+      <div class="sw"><div class="chipc" style="background:#3F6BB8"></div><span class="lbl">folder line</span><span class="hex">#3F6BB8</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="n">06</span><h2>What ships</h2></div>
+    <p class="sec-note">All ten files are plain SVG in <span class="mono">design/mascot/</span>, generated from one source — <span class="mono">build.mjs</span> — so the character has a single definition. Edit the script, re-run <span class="mono">node design/mascot/build.mjs</span>, and every pose, the mark and the icon change together.</p>
+    <div class="tbl">
+      <table>
+        <tr><th>File</th><th>Size</th><th>Where it goes</th></tr>
+        <tr><td class="f">bo-idle.svg</td><td class="d">240×240</td><td class="u">Sign-in, About, sidebar footer</td></tr><tr><td class="f">bo-carry.svg</td><td class="d">240×240</td><td class="u">Transfers panel while a job runs</td></tr><tr><td class="f">bo-full.svg</td><td class="d">240×240</td><td class="u">Transfers panel, 4+ queued</td></tr><tr><td class="f">bo-empty.svg</td><td class="d">240×240</td><td class="u">Empty folder, empty Trash, no search results</td></tr><tr><td class="f">bo-offline.svg</td><td class="d">240×240</td><td class="u">Offline banner, failed connect</td></tr><tr><td class="f">mark.svg</td><td class="d">240×240</td><td class="u">Titlebar, About, README</td></tr><tr><td class="f">mark-micro.svg</td><td class="d">240×240</td><td class="u">≤24 px — favicon, tab bar, Finder sidebar</td></tr><tr><td class="f">icon-1024.svg</td><td class="d">1024×1024</td><td class="u">build/appicon.png → icons.icns, icon.ico</td></tr><tr><td class="f">icon-micro.svg</td><td class="d">1024×1024</td><td class="u">the 16 and 32 px rungs of icons.icns</td></tr><tr><td class="f">icon-layer.svg</td><td class="d">200×200</td><td class="u">build/appicon.icon/Assets — Icon Composer layer</td></tr><tr><td class="f">lockup.svg</td><td class="d">300×76</td><td class="u">Sign-in header, docs, GitHub social preview</td></tr><tr><td class="f">lockup-stacked.svg</td><td class="d">200×160</td><td class="u">Splash, DMG background</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer class="mono">Soteria identity · round two · Bo — 5 poses, 2 mark cuts, 1 app icon, 2 lockups · generated by design/mascot/build.mjs</footer>
+</div>

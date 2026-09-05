@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #F6F5F1; }
+.app {
+  font-family: 'Geist', -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  --bg: #F6F5F1; --surface: #FFFFFF; --surface-2: #EFEEE9;
+  --border: #E6E4DE; --border-2: #D8D5CD;
+  --text: #1B1A17; --text-2: #6E6A62; --text-3: #9B978E;
+  --primary: #171614; --on-primary: #FFFFFF;
+  --accent: #2E64C8; --accent-soft: #E4ECFA; --accent-text: #1F4F9E;
+  --ok: #3B7A45; --ok-soft: #E6F1E7;
+  --warn: #956400; --warn-soft: #FBF3DB;
+  --danger: #B3362F; --danger-soft: #FBE9E7; --on-danger: #FFFFFF;
+  --folder-a: #DCE7F8; --folder-b: #C6D8F4; --folder-line: #3F6BB8;
+  --seg-1: #9DB9EA; --seg-2: #9FCBA6; --seg-3: #E8CD82; --seg-4: #C9C6BE;
+  --shadow: 0 8px 24px rgba(27, 26, 23, 0.08);
+}
+.app[data-theme="dark"] {
+  --bg: #151412; --surface: #1C1B18; --surface-2: #252420;
+  --border: #2C2B26; --border-2: #3A3832;
+  --text: #ECEAE4; --text-2: #A19D94; --text-3: #726F67;
+  --primary: #ECEAE4; --on-primary: #151412;
+  --accent: #6F9BE8; --accent-soft: #1F2E4A; --accent-text: #A9C4F2;
+  --ok: #7FC48A; --ok-soft: #1D3122;
+  --warn: #E0B25A; --warn-soft: #382E16;
+  --danger: #E27A72; --danger-soft: #3A201E; --on-danger: #1A0F0E;
+  --folder-a: #25355A; --folder-b: #2F457A; --folder-line: #7FA3E6;
+  --seg-1: #4F76BF; --seg-2: #4E8C5A; --seg-3: #A88A3A; --seg-4: #5A5850;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mono { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { display: block; }
+.trunc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+kbd { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; background: var(--surface-2); color: var(--text-3); }
+</style>
+</helmet>
+<div class="app" data-theme="{{theme}}" style="width:390px;height:844px;overflow:hidden;background:var(--bg);color:var(--text);display:flex;flex-direction:column;position:relative;">
+<div style="height:54px;flex:none"></div>
+<div style="height:52px;flex:none;display:flex;align-items:center;padding:0 8px 0 20px">
+  
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <div class="trunc" style="font-size:17px;font-weight:600;letter-spacing:-0.01em">Settings</div>
+    
+  </div>
+  <div style="display:flex"></div>
+</div>
+<div style="flex:1;min-height:0;overflow:hidden;padding:8px 16px;display:flex;flex-direction:column;gap:20px">
+  
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="padding:0 4px;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Account</div>
+  <div style="border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:4px 16px"><div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+      <span style="width:40px;height:40px;border-radius:10px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><span class="ico" style="width:20px;height:20px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="6" rx="1.5"/><rect x="3.5" y="13.5" width="17" height="6" rx="1.5"/><circle cx="7" cy="7.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="7" cy="16.5" r="0.9" fill="currentColor" stroke="none"/></svg></span></span>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">Lab SFTPGo</span><span class="trunc mono" style="font-size:12px;color:var(--text-3)">192.168.1.194:8081 · pos</span></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;height:48px;font-size:15px;color:var(--danger)">Sign out</div></div>
+</div>
+  
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="padding:0 4px;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Appearance</div>
+  <div style="border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:4px 16px"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;font-size:15px;"><span>Theme</span><span style="color:var(--text-3);display:inline-flex;align-items:center;gap:6px">
+<div style="display:inline-flex;padding:2px;background:var(--surface-2);border-radius:6px;gap:2px">
+  <span style="padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;color:var(--text-2);background:transparent;">System</span><span style="padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;color:var(--text-2);background:transparent;">Light</span><span style="padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;color:var(--text-2);background:transparent;">Dark</span>
+</div></span></div></div>
+</div>
+  
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="padding:0 4px;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Storage</div>
+  <div style="border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:4px 16px"><div style="padding:12px 0;display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--text-2)">48.2 GB of 200 GB used</span><span class="mono" style="color:var(--text-3)">151.8 GB free</span></div>
+<div style="display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--surface-2);gap:2px">
+  <div style="width:10.7%;background:var(--seg-1)"></div>
+  <div style="width:7.9%;background:var(--seg-2)"></div>
+  <div style="width:3.2%;background:var(--seg-3)"></div>
+  <div style="width:2.4%;background:var(--seg-4)"></div>
+</div></div></div>
+</div>
+  <div style="text-align:center;font-size:11px;color:var(--text-3)" class="mono">Soteria 0.0.1 - Powered by ZenSoftware</div>
+</div>
+<div style="flex:none;height:84px;border-top:1px solid var(--border);background:var(--surface);display:flex;padding:6px 8px 34px"><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.3l1.8 2h8.9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg></span><span style="font-size:10px;font-weight:500">Files</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.5 2"/></svg></span><span style="font-size:10px;font-weight:500">Recent</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20V5M4 9l4-4 4 4M16 4v15M12 15l4 4 4-4"/></svg></span><span style="font-size:10px;font-weight:500">Transfers</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text)"><span class="ico" style="width:22px;height:22px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span><span style="font-size:10px;font-weight:500">Settings</span></div></div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark;
+    if (dark === undefined || dark === null) dark = false;
+    return { theme: dark ? 'dark' : 'light' };
+  }
+}
+</script>
+</body>
+</html>

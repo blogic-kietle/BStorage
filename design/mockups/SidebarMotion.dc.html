@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #F6F5F1; }
+.app {
+  font-family: 'Geist', -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  --bg: #F6F5F1; --surface: #FFFFFF; --surface-2: #EFEEE9;
+  --border: #E6E4DE; --border-2: #D8D5CD;
+  --text: #1B1A17; --text-2: #6E6A62; --text-3: #9B978E;
+  --primary: #171614; --on-primary: #FFFFFF;
+  --accent: #2E64C8; --accent-soft: #E4ECFA; --accent-text: #1F4F9E;
+  --ok: #3B7A45; --ok-soft: #E6F1E7;
+  --warn: #956400; --warn-soft: #FBF3DB;
+  --danger: #B3362F; --danger-soft: #FBE9E7; --on-danger: #FFFFFF;
+  --folder-a: #DCE7F8; --folder-b: #C6D8F4; --folder-line: #3F6BB8;
+  --seg-1: #9DB9EA; --seg-2: #9FCBA6; --seg-3: #E8CD82; --seg-4: #C9C6BE;
+  --shadow: 0 8px 24px rgba(27, 26, 23, 0.08);
+}
+.app[data-theme="dark"] {
+  --bg: #151412; --surface: #1C1B18; --surface-2: #252420;
+  --border: #2C2B26; --border-2: #3A3832;
+  --text: #ECEAE4; --text-2: #A19D94; --text-3: #726F67;
+  --primary: #ECEAE4; --on-primary: #151412;
+  --accent: #6F9BE8; --accent-soft: #1F2E4A; --accent-text: #A9C4F2;
+  --ok: #7FC48A; --ok-soft: #1D3122;
+  --warn: #E0B25A; --warn-soft: #382E16;
+  --danger: #E27A72; --danger-soft: #3A201E; --on-danger: #1A0F0E;
+  --folder-a: #25355A; --folder-b: #2F457A; --folder-line: #7FA3E6;
+  --seg-1: #4F76BF; --seg-2: #4E8C5A; --seg-3: #A88A3A; --seg-4: #5A5850;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mono { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { display: block; }
+.trunc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+kbd { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; background: var(--surface-2); color: var(--text-3); }
+</style>
+</helmet>
+<div class="app" data-theme="{{theme}}" style="width:1280px;height:800px;overflow:hidden;background:var(--bg);color:var(--text);display:block;">
+<div style="display:flex;flex-direction:column;gap:28px;padding:24px 32px">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Collapse · 350 ms · power3.inOut</div>
+    <div style="display:flex;gap:20px">
+      
+<div style="display:flex;flex-direction:column;gap:10px">
+  <div style="position:relative;width:360px;height:225px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+    <div style="position:absolute;top:0;bottom:0;left:0;width:68px;background:var(--bg);border-right:1px solid var(--border);transform:translateX(0px);opacity:1">
+      <div style="display:flex;flex-direction:column;gap:6px;padding:16px 8px 0"><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:1"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:1"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:1"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:1"></div></div>
+    </div>
+    <div style="position:absolute;top:0;bottom:0;left:68px;right:0">
+      <div style="height:16px;border-bottom:1px solid var(--border)"></div>
+      <div style="padding:10px;display:flex;flex-direction:column;gap:6px"><div style="height:8px;width:70%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:62%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:54%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:46%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:38%;border-radius:4px;background:var(--surface-2)"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:var(--text-3)">0 ms</span><span style="color:var(--text-2)">Sidebar mở, nội dung 240px từ mép</span></div>
+</div>
+      
+<div style="display:flex;flex-direction:column;gap:10px">
+  <div style="position:relative;width:360px;height:225px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+    <div style="position:absolute;top:0;bottom:0;left:0;width:68px;background:var(--bg);border-right:1px solid var(--border);transform:translateX(-22px);opacity:1">
+      <div style="display:flex;flex-direction:column;gap:6px;padding:16px 8px 0"><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0.4"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0.4"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0.4"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0.4"></div></div>
+    </div>
+    <div style="position:absolute;top:0;bottom:0;left:46px;right:0">
+      <div style="height:16px;border-bottom:1px solid var(--border)"></div>
+      <div style="padding:10px;display:flex;flex-direction:column;gap:6px"><div style="height:8px;width:70%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:62%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:54%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:46%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:38%;border-radius:4px;background:var(--surface-2)"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:var(--text-3)">120 ms</span><span style="color:var(--text-2)">Sidebar trượt trái, chữ tan trước</span></div>
+</div>
+      
+<div style="display:flex;flex-direction:column;gap:10px">
+  <div style="position:relative;width:360px;height:225px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+    <div style="position:absolute;top:0;bottom:0;left:0;width:68px;background:var(--bg);border-right:1px solid var(--border);transform:translateX(-52px);opacity:0.5">
+      <div style="display:flex;flex-direction:column;gap:6px;padding:16px 8px 0"><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div></div>
+    </div>
+    <div style="position:absolute;top:0;bottom:0;left:16px;right:0">
+      <div style="height:16px;border-bottom:1px solid var(--border)"></div>
+      <div style="padding:10px;display:flex;flex-direction:column;gap:6px"><div style="height:8px;width:70%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:62%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:54%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:46%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:38%;border-radius:4px;background:var(--surface-2)"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:var(--text-3)">240 ms</span><span style="color:var(--text-2)">Nội dung nới theo cùng ease</span></div>
+</div>
+      
+<div style="display:flex;flex-direction:column;gap:10px">
+  <div style="position:relative;width:360px;height:225px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+    <div style="position:absolute;top:0;bottom:0;left:0;width:68px;background:var(--bg);border-right:1px solid var(--border);transform:translateX(-68px);opacity:0">
+      <div style="display:flex;flex-direction:column;gap:6px;padding:16px 8px 0"><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div><div style="height:8px;border-radius:4px;background:var(--border-2);opacity:0"></div></div>
+    </div>
+    <div style="position:absolute;top:0;bottom:0;left:0px;right:0">
+      <div style="height:16px;border-bottom:1px solid var(--border)"></div>
+      <div style="padding:10px;display:flex;flex-direction:column;gap:6px"><div style="height:8px;width:70%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:62%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:54%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:46%;border-radius:4px;background:var(--surface-2)"></div><div style="height:8px;width:38%;border-radius:4px;background:var(--surface-2)"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:var(--text-3)">350 ms</span><span style="color:var(--text-2)">Ẩn hẳn, toggle sang trạng thái đóng</span></div>
+</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1100px">
+    <div>
+      <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">GSAP timeline (gsap-core + Flip)</div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Layout</span><span class="mono" style="text-align:right">Flip.getState([aside, main]) → toggle class → Flip.from(state)</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Duration / ease</span><span class="mono" style="text-align:right">0.35 s · power3.inOut</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Sidebar</span><span class="mono" style="text-align:right">x: -240, autoAlpha: 0 (transform, không animate width)</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Labels & rows</span><span class="mono" style="text-align:right">autoAlpha 0, x: -8, stagger 0.015 (chạy trước 60 ms)</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Toggle icon</span><span class="mono" style="text-align:right">pane fill 0.35 → 0, chấm hiện khi ẩn</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Mở lại</span><span class="mono" style="text-align:right">tl.reversed(!tl.reversed()) — cùng timeline, đảo chiều</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Reduced motion</span><span class="mono" style="text-align:right">gsap.matchMedia: duration 0, không stagger</span></div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Hành vi</div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Toggle</span><span class="mono" style="text-align:right">Chỉ bằng nút cạnh 3 nút cửa sổ · hover hiện tooltip "Hide sidebar"</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Khi ẩn</span><span class="mono" style="text-align:right">Toggle chuyển lên header chính, cạnh 3 nút cửa sổ</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Chấm trên toggle</span><span class="mono" style="text-align:right">Có transfer đang chạy hoặc offline · màu accent / warn</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Nhớ trạng thái</span><span class="mono" style="text-align:right">prefs.sidebar = open | hidden, theo máy</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Cửa sổ hẹp</span><span class="mono" style="text-align:right">Dưới 900px: tự ẩn, mở lại khi rộng ra</span></div>
+      <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><span style="color:var(--text-2)">Kéo thả & phím</span><span class="mono" style="text-align:right">Không đổi; Files vẫn nhận drop khi sidebar ẩn</span></div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark;
+    if (dark === undefined || dark === null) dark = false;
+    return { theme: dark ? 'dark' : 'light' };
+  }
+}
+</script>
+</body>
+</html>

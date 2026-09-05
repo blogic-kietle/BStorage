@@ -1,0 +1,97 @@
+<!doctype html><meta charset="utf-8"><style>
+@font-face { font-family: 'M'; src: url('file:///Volumes/Data/Labs/bstorage/frontend/node_modules/@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; }
+html { zoom: 2; }
+body { margin: 0; font-family: 'M', -apple-system, 'Helvetica Neue', sans-serif; font-size: 13px; line-height: 1.4; -webkit-font-smoothing: antialiased; }
+.mono { font-family: 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.stage { position: relative; overflow: hidden; }
+.light, .dark { position: absolute; inset: 0; }
+.light { background: #F6F5F1; }
+.light::after { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 70% at 22% 28%, rgba(46,100,200,0.10), transparent 70%); }
+.dark { background: #151412; }
+.dark::after { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 70% at 78% 72%, rgba(111,155,232,0.18), transparent 70%); }
+.grain { position: absolute; inset: 0; background-image: radial-gradient(rgba(27,26,23,0.08) 0.6px, transparent 0.6px); background-size: 6px 6px; opacity: 0.5; }
+.dark .grain { background-image: radial-gradient(rgba(236,234,228,0.10) 0.6px, transparent 0.6px); }
+.t { --bg:#F6F5F1; --surface:#FFFFFF; --surface-2:#EFEEE9; --border:#E6E4DE; --border-2:#D8D5CD; --text:#1B1A17; --text-2:#6E6A62; --text-3:#9B978E; --accent:#2E64C8; --accent-soft:#E4ECFA; --accent-text:#1F4F9E; --ok:#3B7A45; --fa:#DCE7F8; --fb:#C6D8F4; --fl:#3F6BB8; --primary:#171614; --on-primary:#fff; --shadow: 0 30px 80px rgba(27,26,23,0.22), 0 2px 6px rgba(27,26,23,0.08); color: var(--text); }
+.dark .t { --bg:#151412; --surface:#1C1B18; --surface-2:#252420; --border:#2C2B26; --border-2:#3A3832; --text:#ECEAE4; --text-2:#A19D94; --text-3:#726F67; --accent:#6F9BE8; --accent-soft:#1F2E4A; --accent-text:#A9C4F2; --ok:#7FC48A; --fa:#25355A; --fb:#2F457A; --fl:#7FA3E6; --primary:#ECEAE4; --on-primary:#151412; --shadow: 0 30px 80px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4); }
+.win { position: absolute; display: flex; overflow: hidden; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); border: 1px solid var(--border); }
+.side { width: 190px; flex: none; background: var(--bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 9px; border-radius: 6px; color: var(--text-2); }
+.row.on { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-weight: 500; }
+.cap { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding: 14px 18px 4px; }
+.hdr { height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 18px; border-bottom: 1px solid var(--border); }
+.btn { height: 28px; padding: 0 11px; border-radius: 6px; border: 1px solid var(--border-2); background: var(--surface); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; color: var(--text); }
+.btn.p { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.search { height: 28px; width: 190px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); display: flex; align-items: center; gap: 7px; padding: 0 9px; color: var(--text-3); font-size: 12px; }
+.card { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.card .name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .meta { font-size: 11px; color: var(--text-3); }
+.thumb { height: 74px; border-radius: 6px; }
+.bar { height: 5px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.panel { position: absolute; width: 380px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+.prow { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-top: 1px solid var(--border); }
+.menu { position: absolute; width: 250px; padding: 5px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border-2); box-shadow: var(--shadow); font-size: 13px; }
+.menu div { height: 24px; padding: 0 10px; display: flex; align-items: center; justify-content: space-between; border-radius: 5px; }
+.menu .dis { color: var(--text-3); }
+.menu .hl { background: #3478F6; color: #fff; }
+.menu .sep { height: 1px; margin: 5px 10px; padding: 0; background: var(--border-2); }
+.mark { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 26px; letter-spacing: -0.03em; }
+.eyebrow { position: absolute; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.tag { position: absolute; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.25; }
+</style>
+<div class="stage" style="width:900px;height:560px">
+  <div class="light"><div class="grain"></div>
+<div class="t panel" style="left:120px;top:100px;width:420px">
+  <div style="padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600;font-size:13px">Uploading 3 of 12 items</span><span class="mono" style="color:var(--text-3);font-size:12px">42% · 1 min left</span></div>
+    <div class="bar"><i style="width:42%"></i></div>
+  </div>
+  
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">IMG_2041.jpg</span><span class="mono" style="color:var(--text-3)">74%</span></div><span style="font-size:11px;color:var(--text-3)">3.1 MB of 4.2 MB · 6.8 MB/s</span><div class="bar" style="height:4px"><i style="width:74%"></i></div></div></div>
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">IMG_2042.jpg</span><span class="mono" style="color:var(--text-3)">31%</span></div><span style="font-size:11px;color:var(--text-3)">1.2 MB of 3.9 MB · 5.9 MB/s</span><div class="bar" style="height:4px"><i style="width:31%"></i></div></div></div>
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">promo-loop-v2.mp4</span><span class="mono" style="color:var(--text-3)"></span></div><span style="font-size:11px;color:var(--text-3)">412 MB · Waiting</span></div></div>
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">counter-display.jpg</span><span class="mono" style="color:var(--ok)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></div><span style="font-size:11px;color:var(--text-3)">2.9 MB · Done 17:41</span></div></div>
+</div></div>
+  <div class="dark" style="clip-path:polygon(50% 0, 100% 0, 100% 100%, 50% 100%)"><div class="grain"></div>
+<div class="t panel" style="left:120px;top:100px;width:420px">
+  <div style="padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600;font-size:13px">Uploading 3 of 12 items</span><span class="mono" style="color:var(--text-3);font-size:12px">42% · 1 min left</span></div>
+    <div class="bar"><i style="width:42%"></i></div>
+  </div>
+  
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">IMG_2041.jpg</span><span class="mono" style="color:var(--text-3)">74%</span></div><span style="font-size:11px;color:var(--text-3)">3.1 MB of 4.2 MB · 6.8 MB/s</span><div class="bar" style="height:4px"><i style="width:74%"></i></div></div></div>
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">IMG_2042.jpg</span><span class="mono" style="color:var(--text-3)">31%</span></div><span style="font-size:11px;color:var(--text-3)">1.2 MB of 3.9 MB · 5.9 MB/s</span><div class="bar" style="height:4px"><i style="width:31%"></i></div></div></div>
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">promo-loop-v2.mp4</span><span class="mono" style="color:var(--text-3)"></span></div><span style="font-size:11px;color:var(--text-3)">412 MB · Waiting</span></div></div>
+  <div class="prow"><span style="width:28px;height:28px;border-radius:6px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 8"/></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">counter-display.jpg</span><span class="mono" style="color:var(--ok)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></div><span style="font-size:11px;color:var(--text-3)">2.9 MB · Done 17:41</span></div></div>
+</div></div>
+  <div style="position:absolute;left:560px;top:270px"><svg width="280" height="280" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 218 106 218 130C218 154 158 178 120 178C82 178 22 154 22 130C22 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <g transform="rotate(-10 55 130)"><rect x="40.5" y="111" width="29" height="38" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M45.5 120.5h19M45.5 134.75h19" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g><g transform="rotate(10 185 130)"><rect x="170.5" y="111" width="29" height="38" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M175.5 120.5h19M175.5 134.75h19" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g>
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="74" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M67.7 205.1v6.3M74 206.9v6.3M80.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="166" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M159.7 205.1v6.3M166 206.9v6.3M172.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  
+</svg>
+</div><div class="eyebrow" style="left:48px;top:44px;color:#6E6A62">Transfers</div>
+</div>

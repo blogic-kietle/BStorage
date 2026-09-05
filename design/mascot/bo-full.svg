@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 218 106 218 130C218 154 158 178 120 178C82 178 22 154 22 130C22 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <g transform="rotate(-10 55 130)"><rect x="40.5" y="111" width="29" height="38" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M45.5 120.5h19M45.5 134.75h19" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g><g transform="rotate(10 185 130)"><rect x="170.5" y="111" width="29" height="38" rx="3" fill="#C6D8F4" stroke="#1B1A17" stroke-width="2.2"/><path d="M175.5 120.5h19M175.5 134.75h19" fill="none" stroke="#3F6BB8" stroke-width="1.8" stroke-linecap="round"/></g>
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="100" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="103" cy="98" r="3" fill="#FFFFFF"/>
+  <ellipse cx="140" cy="102" rx="7.5" ry="9.5" fill="#1B1A17"/><circle cx="143" cy="98" r="3" fill="#FFFFFF"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="74" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M67.7 205.1v6.3M74 206.9v6.3M80.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="166" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M159.7 205.1v6.3M166 206.9v6.3M172.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  
+</svg>

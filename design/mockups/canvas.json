@@ -1,0 +1,647 @@
+{
+  "artboards": [
+    {
+      "file": "Servers.dc.html",
+      "title": "Servers",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SignIn.dc.html",
+      "title": "Sign in",
+      "x": 1380,
+      "y": 0,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SignInDark.dc.html",
+      "title": "Sign in · dark · error",
+      "x": 2760,
+      "y": 0,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Main.dc.html",
+      "title": "Files",
+      "x": 0,
+      "y": 960,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "FilesDark.dc.html",
+      "title": "Files · dark",
+      "x": 1380,
+      "y": 960,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Details.dc.html",
+      "title": "File details",
+      "x": 2760,
+      "y": 960,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Transfers.dc.html",
+      "title": "Transfers",
+      "x": 0,
+      "y": 1920,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "EmptyFolder.dc.html",
+      "title": "Empty folder",
+      "x": 1380,
+      "y": 1920,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Settings.dc.html",
+      "title": "Settings",
+      "x": 2760,
+      "y": 1920,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Dialogs.dc.html",
+      "title": "Dialogs & menus",
+      "x": 0,
+      "y": 2880,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "PreviewImage.dc.html",
+      "title": "Preview · image",
+      "x": 1380,
+      "y": 2880,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "PreviewDoc.dc.html",
+      "title": "Preview · document · dark",
+      "x": 2760,
+      "y": 2880,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "FilesGrid.dc.html",
+      "title": "Files · card view",
+      "x": 0,
+      "y": 3840,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "FilesList.dc.html",
+      "title": "Files · list view · sort menu · dark",
+      "x": 1380,
+      "y": 3840,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Search.dc.html",
+      "title": "Search · everywhere",
+      "x": 2760,
+      "y": 3840,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SearchIndexing.dc.html",
+      "title": "Search · first index · dark",
+      "x": 0,
+      "y": 4800,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Selection.dc.html",
+      "title": "Multi-select · bulk actions",
+      "x": 1380,
+      "y": 4800,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "UploadConflict.dc.html",
+      "title": "Upload conflict · dark",
+      "x": 2760,
+      "y": 4800,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "FolderUpload.dc.html",
+      "title": "Folder upload · Transfers",
+      "x": 0,
+      "y": 5760,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Recent.dc.html",
+      "title": "Recent · dark",
+      "x": 1380,
+      "y": 5760,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "UploadPanel.dc.html",
+      "title": "Upload panel · in progress",
+      "x": 2760,
+      "y": 5760,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "UploadStates.dc.html",
+      "title": "Upload panel · states · dark",
+      "x": 0,
+      "y": 6720,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "UploadDrop.dc.html",
+      "title": "Drop overlay + collapsed panel · dark",
+      "x": 1380,
+      "y": 6720,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Trash.dc.html",
+      "title": "Trash",
+      "x": 2760,
+      "y": 6720,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Bits.dc.html",
+      "title": "Menus, validation, undo, errors, retry · dark",
+      "x": 0,
+      "y": 7680,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "FilesLoading.dc.html",
+      "title": "Files · loading skeleton",
+      "x": 1380,
+      "y": 7680,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "FilesOffline.dc.html",
+      "title": "Files · offline banner · dark",
+      "x": 2760,
+      "y": 7680,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "Intro.dc.html",
+      "title": "First sign-in · network drive intro",
+      "x": 0,
+      "y": 8640,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "IntroWin.dc.html",
+      "title": "Intro · Windows wording · dark",
+      "x": 1380,
+      "y": 8640,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SettingsDrive.dc.html",
+      "title": "Settings · Network drive · connected",
+      "x": 2760,
+      "y": 8640,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "DriveStates.dc.html",
+      "title": "Network drive · states & toasts · dark",
+      "x": 0,
+      "y": 9600,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SidebarMenu.dc.html",
+      "title": "Sidebar · account menu open · dark",
+      "x": 1380,
+      "y": 9600,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SidebarClean.dc.html",
+      "title": "Sidebar · no server button",
+      "x": 2760,
+      "y": 9600,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SidebarOpen.dc.html",
+      "title": "Collapsible sidebar · open · toggle in title bar",
+      "x": 0,
+      "y": 10560,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SidebarHidden.dc.html",
+      "title": "Collapsible sidebar · hidden · dot on toggle · dark",
+      "x": 1380,
+      "y": 10560,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SidebarMotion.dc.html",
+      "title": "Collapsible sidebar · motion storyboard",
+      "x": 2760,
+      "y": 10560,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "WinOpen.dc.html",
+      "title": "Windows · frameless · lights in the sidebar row · dark",
+      "x": 0,
+      "y": 11520,
+      "w": 1440,
+      "h": 900
+    },
+    {
+      "file": "WinHidden.dc.html",
+      "title": "Windows · frameless · sidebar hidden",
+      "x": 1540,
+      "y": 11520,
+      "w": 1440,
+      "h": 900
+    },
+    {
+      "file": "WinBits.dc.html",
+      "title": "Windows · controls, before/after, behaviour · dark",
+      "x": 3080,
+      "y": 11520,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "TrayMac.dc.html",
+      "title": "Background · macOS menu bar + Dock badge · dark",
+      "x": 0,
+      "y": 12480,
+      "w": 1440,
+      "h": 900
+    },
+    {
+      "file": "TrayWin.dc.html",
+      "title": "Background · Windows tray + taskbar badge · dark",
+      "x": 1540,
+      "y": 12480,
+      "w": 1440,
+      "h": 900
+    },
+    {
+      "file": "BackgroundBits.dc.html",
+      "title": "Background · menu states, notifications, settings, quit · dark",
+      "x": 3080,
+      "y": 12480,
+      "w": 1280,
+      "h": 960
+    },
+    {
+      "file": "MServers.dc.html",
+      "title": "Servers",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MSignIn.dc.html",
+      "title": "Add server",
+      "x": 460,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MFiles.dc.html",
+      "title": "Files · list",
+      "x": 920,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MFilesCard.dc.html",
+      "title": "Files · card · dark",
+      "x": 1380,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MEmpty.dc.html",
+      "title": "Empty folder",
+      "x": 1840,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MActions.dc.html",
+      "title": "File actions sheet",
+      "x": 0,
+      "y": 1024,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MSelect.dc.html",
+      "title": "Multi-select",
+      "x": 460,
+      "y": 1024,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MUpload.dc.html",
+      "title": "Upload sheet",
+      "x": 920,
+      "y": 1024,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MConflict.dc.html",
+      "title": "Upload conflict · dark",
+      "x": 1380,
+      "y": 1024,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MSearch.dc.html",
+      "title": "Search · everywhere · dark",
+      "x": 1840,
+      "y": 1024,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MPreview.dc.html",
+      "title": "Preview · dark",
+      "x": 0,
+      "y": 2048,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MTransfers.dc.html",
+      "title": "Transfers",
+      "x": 460,
+      "y": 2048,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MRecent.dc.html",
+      "title": "Recent · dark",
+      "x": 920,
+      "y": 2048,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    },
+    {
+      "file": "MSettings.dc.html",
+      "title": "Settings",
+      "x": 1380,
+      "y": 2048,
+      "w": 390,
+      "h": 844,
+      "page": "mobile"
+    }
+  ],
+  "pages": [
+    {
+      "id": "desktop",
+      "name": "Desktop"
+    },
+    {
+      "id": "mobile",
+      "name": "Mobile"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "intro",
+      "x": 0,
+      "y": -300,
+      "w": 640,
+      "text": "Soteria — mockup UI cho app WebDAV (Wails 3 · Svelte 5 · Tailwind · GSAP).\nMỗi artboard có công tắc Dark ở thanh tweak phía trên khung: bật để xem bản tối của bất kỳ màn nào.\nHàng 1: chọn server & đăng nhập · Hàng 2: duyệt tệp · Hàng 3: transfers, thư mục rỗng, settings · Hàng 4: dialog & menu."
+    },
+    {
+      "id": "row-onboarding",
+      "x": 0,
+      "y": -130,
+      "w": 560,
+      "text": "Đăng nhập: chọn server đã lưu, hoặc Add server để tới form. Nếu chưa lưu mật khẩu, server đã lưu cũng mở form này với địa chỉ điền sẵn. Bản dark bên phải minh hoạ trạng thái lỗi kết nối."
+    },
+    {
+      "id": "row-files",
+      "x": 0,
+      "y": 830,
+      "w": 560,
+      "text": "Duyệt tệp: sidebar đổi server, Files / Recent / Transfers, cây thư mục gốc, quota lấy từ server. Click một tệp mở panel chi tiết bên phải (metadata WebDAV: Content-Type, ETag). Recent dùng lại bảng này, sắp theo Modified."
+    },
+    {
+      "id": "row-tools",
+      "x": 0,
+      "y": 1790,
+      "w": 560,
+      "text": "Transfers: hàng đợi upload/download với tốc độ, pause, huỷ. Thư mục rỗng: vùng kéo-thả. Settings: đăng xuất, theme, thư mục tải về, số luồng, chứng chỉ tự ký, dung lượng."
+    },
+    {
+      "id": "row-dialogs",
+      "x": 0,
+      "y": 2750,
+      "w": 560,
+      "text": "Dialog & menu: menu chuột phải, tạo thư mục, đổi tên, xoá (WebDAV không có thùng rác), di chuyển, trùng tên khi upload, toast."
+    },
+    {
+      "id": "row-preview",
+      "x": 1380,
+      "y": 2750,
+      "w": 620,
+      "text": "Preview: click một tệp xem được (ảnh, PDF, video, audio, text/markdown/code, docx) mở chế độ xem toàn cửa sổ; Esc hoặc nút X để đóng, Download ngay trên header. Ảnh, PDF, video, audio, text do webview tự render; docx chuyển sang HTML bằng mammoth. Tệp không xem được (zip, apk, xlsx, dmg…) vẫn mở panel chi tiết như cũ. Trong panel chi tiết, ô thumbnail hiển thị ảnh thật và click vào cũng mở preview."
+    },
+    {
+      "id": "row-views",
+      "x": 0,
+      "y": 3710,
+      "w": 640,
+      "text": "Hai chế độ xem + sắp xếp. Header thêm nút Sort (menu: Name, Kind, Size, Date modified, Date created; Ascending/Descending) và công tắc List/Card. Card view: thư mục và tệp đều là card, tệp ảnh hiện thumbnail thật. List view: một bảng chung, thư mục luôn nằm trên, có cột Created; click tiêu đề cột cũng đổi sắp xếp. Lựa chọn view và sort được nhớ giữa các lần mở."
+    },
+    {
+      "id": "row-search",
+      "x": 2760,
+      "y": 3710,
+      "w": 600,
+      "text": "Tìm toàn server: gõ vào ô Search vẫn lọc thư mục hiện tại như cũ; chuyển sang \"Everywhere\" (hoặc nhấn Enter) để tìm trong toàn bộ cây. Backend lấy cả cây bằng một PROPFIND Depth: infinity (SFTPGo hỗ trợ), cache trong bộ nhớ, tìm ngay tại máy; có nút Refresh và thời điểm lập chỉ mục. Kết quả hiện tên (tô đoạn khớp) và đường dẫn; click vào mở đúng thư mục và chọn tệp. Lần đầu (artboard dark) chỉ mục xây dần, kết quả hiện dần, vẫn duyệt được trong lúc chờ. Tôn trọng công tắc Show hidden files."
+    },
+    {
+      "id": "row-batch",
+      "x": 1380,
+      "y": 4670,
+      "w": 640,
+      "text": "Chọn nhiều: Cmd-click thêm/bớt, Shift-click chọn dải, Cmd-A chọn hết, Esc hoặc click nền bỏ chọn; header hiện chip \"3 selected\". Panel phải thành bản tóm tắt: số mục, tổng dung lượng, danh sách, và các thao tác hàng loạt Download / Move / Delete; menu chuột phải và kéo ra Finder cũng áp dụng cho cả nhóm. Upload trùng tên: dialog so sánh bản trên server và bản của bạn, Skip / Keep both (đổi tên thành \"name 2.ext\") / Replace, có ô \"Do this for the remaining N files\". Với thư mục trùng tên: Merge / Keep both / Skip."
+    },
+    {
+      "id": "row-upload",
+      "x": 2760,
+      "y": 5630,
+      "w": 620,
+      "text": "Upload panel: thẻ 380px nổi ở góc dưới phải vùng Files, xuất hiện ngay khi bắt đầu upload (thả tệp, nút Upload, upload thư mục) và nằm ở shell nên vẫn còn khi đổi thư mục hay sang Recent; ẩn trên trang Transfers vì trùng. Header: tiêu đề \"Uploading 3 of 12 items\", dòng phụ dung lượng + thời gian còn lại, thanh tiến độ tổng; nút ▾ thu gọn, nút × đóng. Mỗi dòng là một mục: thư mục là một dòng tổng (38 / 128 tệp), tệp đang chạy có thanh tiến độ + tốc độ + × huỷ, tệp chờ ghi \"Waiting\", tệp xong có dấu ✓ và khi rê chuột hiện \"Show in folder\" (mở đúng thư mục, chọn tệp). Thứ tự: đang chạy → chờ → xong. Footer: \"Open Transfers\" và \"Cancel all\". Toast \"Uploaded 3 files\" bỏ, panel thay thế; toast chỉ còn cho lỗi ngoài upload."
+    },
+    {
+      "id": "row-upload-2",
+      "x": 0,
+      "y": 6590,
+      "w": 640,
+      "text": "Trạng thái panel: thu gọn còn một dòng \"Uploading 3 of 12 items · 42%\" với thanh tiến độ mảnh; xong hết đổi thành \"12 items uploaded\" (dấu ✓, không tự đóng, giữ tới khi bấm × hoặc bắt đầu đợt upload mới thì gộp vào). Bấm × khi đang chạy hỏi \"Cancel 9 remaining uploads?\". Tệp trùng tên xếp vào \"waiting for your decision\" với nút Resolve mở dialog trùng tên hiện có, các tệp khác vẫn tiếp tục; tệp lỗi có Retry từng dòng và \"Retry all\" ở footer, thanh tổng chuyển màu vàng. Kéo tệp vào cửa sổ: vùng nội dung phủ lớp mờ + viền đứt màu accent, ghi rõ thư mục đích và số mục; panel thu gọn vẫn hiện ở góc. Chỉ áp dụng cho upload; download (kéo ra Finder) vẫn xem ở Transfers."
+    },
+    {
+      "id": "row-trash",
+      "x": 2760,
+      "y": 6590,
+      "w": 620,
+      "text": "Thùng rác: Delete không xoá thật mà MOVE vào /.trash/<mốc thời gian>/<tên> trên server, kèm một tệp .origin ghi thư mục gốc để Restore trả về đúng chỗ (tạo lại thư mục cha nếu thiếu, trùng tên thì thêm \" 2\"). Không còn dialog xác nhận khi xoá; thay bằng toast \"Moved … to Trash · Undo\" 6 giây. Thư mục .trash bị ẩn ở mọi nơi (Files, search, Recent, index) kể cả khi bật Show hidden files; chỉ mục Trash ở sidebar mới xem được. Trang Trash: tên, vị trí gốc, thời điểm xoá, dung lượng; rê chuột hiện Restore / Delete now; header có Restore all và Empty Trash (hỏi xác nhận vì không hoàn tác được). Mục quá 30 ngày được dọn tự động lúc kết nối. Lưu ý .trash vẫn tính vào quota trên server."
+    },
+    {
+      "id": "row-bits",
+      "x": 0,
+      "y": 7550,
+      "w": 700,
+      "text": "Menu item thêm Copy ⌘C / Cut ⌘X / Duplicate / Copy to…; Delete đổi thành Move to Trash ⌘⌫. Chuột phải vùng trống: New folder, Upload files…, Paste N items (mờ khi clipboard rỗng), Select all, Refresh ⌘R. Copy dùng WebDAV COPY, trùng tên thì thêm \" copy\". Kiểm tra tên ngay trong dialog: rỗng, chứa \"/\", chỉ toàn khoảng trắng, \".\" hoặc \"..\", trùng tên trong thư mục → báo đỏ dưới ô và khoá nút. Lỗi từ server đổi sang câu dễ hiểu theo mã HTTP (403 quyền, 404 không còn tồn tại, 409 thư mục đích không có, 412 trùng tên, 423 bị khoá, 507 hết dung lượng, 5xx lỗi server, lỗi mạng \"Can’t reach the server\"). Transfers: dòng lỗi/huỷ có Retry, ghi rõ không thể tạm dừng. Skeleton: khối mờ nhấp nháy nhẹ thay màn trắng, chỉ hiện nếu tải quá 150 ms. Offline: banner vàng dưới header, giữ danh sách cũ (làm mờ), tự thử lại 2→4→8→30 s, có Retry now; khi nối lại hiện banner xanh 3 s và tải lại thư mục hiện tại."
+    },
+    {
+      "id": "row-intro",
+      "x": 0,
+      "y": 8510,
+      "w": 720,
+      "text": "Giới thiệu lần đầu (theo mẫu ChatGPT Atlas): thẻ 560px giữa màn, nền tối mờ phía sau; nửa trên là banner với linh vật Bo và cửa sổ Finder nghiêng có mục \"Soteria\" trong Locations; nửa dưới là nhãn \"New · Network drive\", tiêu đề, một đoạn giải thích, 3 lợi ích (mở và lưu từ mọi app, kéo thả trong Finder, không sync không trùng lặp), một dòng lưu ý thật (cùng mạng mới nhanh, truyền lớn vẫn nhanh hơn trong app), nút \"Connect to Finder\" và \"Not now\", ghi chú đổi được trong Settings. Thẻ chỉ hiện một lần cho mỗi server sau lần đăng nhập đầu; \"Not now\" ghi nhớ và không hỏi lại. Windows đổi chữ thành File Explorer / Map as network drive, lưu ý cần HTTPS và giới hạn 4 GB. Settings thêm mục Network drive: công tắc \"Show Soteria in Finder\" kèm trạng thái Connected · /Volumes/Soteria, công tắc \"Connect automatically\", nút Show in Finder và What is this? (mở lại thẻ giới thiệu). Bốn trạng thái: off (mặc định), connecting, connected, error có Try again. Toast khi nối xong, khi lỗi, khi eject."
+    },
+    {
+      "id": "row-sidebar",
+      "x": 1380,
+      "y": 9470,
+      "w": 640,
+      "text": "Sidebar mới: bỏ hẳn nút server ở trên (tên và địa chỉ lặp nhau), điều hướng Files / Recent / Transfers / Trash nằm ngay dưới thanh tiêu đề. Hàng avatar ở đáy thành nút menu: dòng chính là tên đăng nhập, dòng phụ là tên server, mũi tên gợi ý bấm. Popover mở lên phía trên gồm: header có tên và địa chỉ server, Settings, Switch server… (thay cho nút server cũ), Sign out. Nút bánh răng bỏ; kết nối Finder chỉ điều khiển trong Settings. Thanh Storage giữ nguyên ở trên hàng avatar. Theme chỉ để trong Settings để không lặp."
+    },
+    {
+      "id": "row-collapse",
+      "x": 0,
+      "y": 10430,
+      "w": 700,
+      "text": "Sidebar thu gọn theo mẫu Granola: một nút toggle nằm ngay cạnh ba nút cửa sổ ở đầu sidebar. Bấm nút thì sidebar trượt sang trái và biến mất, vùng nội dung nới ra chiếm toàn bề rộng; khi ẩn, nút toggle chuyển lên header chính và mang chấm màu nếu có transfer đang chạy hoặc đang offline, để không mất thông tin từ sidebar. Bấm lại thì trượt về đúng chỗ cũ. Không có thanh icon thu gọn, không có hover-peek. Storyboard bên phải ghi timeline GSAP: dùng Flip cho phần layout (nới nội dung) để không animate width, sidebar dịch bằng transform x + autoAlpha, chữ tan trước 60 ms với stagger nhẹ, cùng một timeline đảo chiều khi mở lại, reduced-motion thì tắt animation qua gsap.matchMedia."
+    },
+    {
+      "id": "row-win",
+      "x": 0,
+      "y": 11390,
+      "w": 760,
+      "text": "Windows: bỏ thanh caption native (frameless), app tự vẽ ba nút theo macOS ở đúng chỗ traffic lights: đỏ đóng, vàng thu nhỏ, xanh phóng to (đang phóng to thì thành khôi phục). Hàng 52px đầu sidebar trở thành title bar thật: kéo để di chuyển, double-click để phóng to. Ẩn sidebar thì ba nút và nút mở sidebar dời lên đầu header trang, nội dung bắt đầu từ 76px như trên Mac. Mất focus ba nút chuyển xám, rê chuột mới hiện glyph. Chỉ mất flyout Snap Layouts khi rê lên nút phóng to; Win+Z, kéo vào mép, Alt+F4, Alt+Space giữ nguyên. Windows 11 vẽ bo góc và bóng. macOS không đổi gì."
+    },
+    {
+      "id": "row-bg",
+      "x": 0,
+      "y": 12350,
+      "w": 760,
+      "text": "Gói chạy nền: đóng cửa sổ không thoát app nữa, app sống trong menu bar (Mac) hoặc tray (Windows) để network drive không bị eject. Icon là Bo dạng nét đơn sắc, có chấm khi đang truyền, mờ khi offline. Menu native: header tên app + trạng thái kết nối + tài khoản, Open Soteria, dòng tiến độ transfers + Open Transfers, Show in Finder/File Explorer + Disconnect Drive (hoặc Connect Drive), Quit/Exit. Badge trên Dock và taskbar = số transfer đang chạy. Thông báo hệ thống một lần cho mỗi hàng đợi xong, chỉ khi cửa sổ đang ẩn hoặc app khác ở trước; lỗi thì báo số file và nút Retry; lần đầu ẩn cửa sổ có một thông báo nhắc app vẫn chạy. Settings thêm mục Background với hai công tắc; tắt thì đóng cửa sổ là thoát như hiện tại. Quit khi còn transfer hỏi xác nhận."
+    },
+    {
+      "id": "m-intro",
+      "page": "mobile",
+      "x": 0,
+      "y": -260,
+      "w": 720,
+      "text": "Mobile (Android / iOS) — cùng token, font và ngôn ngữ với bản desktop, bố cục lại cho một tay cầm. Khung 390×844; vùng status bar để trống 54px, tab bar chừa 34px cho home indicator. Điều hướng chính bằng tab bar dưới: Files · Recent · Transfers · Settings (Settings thay cho nút server ở sidebar). Mọi hàng cao ≥ 44pt; menu chuột phải → nhấn giữ hoặc nút ⋯ mở action sheet từ đáy; hover/tooltips không dùng."
+    },
+    {
+      "id": "m-row-1",
+      "page": "mobile",
+      "x": 0,
+      "y": -120,
+      "w": 720,
+      "text": "Hàng 1 — Đăng nhập và duyệt tệp. Danh sách server là thẻ lớn, chấm xanh = đang kết nối. Form Add server: input cao 48, mắt hiện mật khẩu, checkbox tròn. Files có 2 view (List / Card, 2 cột) đổi bằng nút ở header, nút ⋯ mở sheet Sort + Show hidden files; nút + (FAB) là điểm upload duy nhất. Thư mục: chạm vào là vào thẳng (không có bước chọn như desktop); tệp: chạm mở preview nếu xem được, ngược lại mở sheet chi tiết."
+    },
+    {
+      "id": "m-row-2",
+      "page": "mobile",
+      "x": 0,
+      "y": 904,
+      "w": 720,
+      "text": "Hàng 2 — Thao tác. Sheet tệp: Preview, Download, Rename, Move, Copy URL, Delete. Chọn nhiều: nhấn giữ một hàng vào chế độ chọn; header đổi thành X · \"3 selected\" · Select all; tab bar thay bằng thanh Download / Move / Delete. Upload sheet: ảnh & video (photo picker), tệp (document picker), New folder — kéo-thả và upload thư mục không có trên mobile. Trùng tên: dialog giữa màn với 3 nút xếp dọc. Search chiếm cả header, phạm vi This folder / Everywhere, kết quả kèm đường dẫn."
+    },
+    {
+      "id": "m-row-3",
+      "page": "mobile",
+      "x": 0,
+      "y": 1928,
+      "w": 720,
+      "text": "Hàng 3 — Preview toàn màn (nền tối, vuốt ngang qua tệp kế, chấm chỉ vị trí), Download và ⋯ ở header. Transfers: thẻ nhóm thư mục ở trên, hàng tệp có progress mảnh, X huỷ; Clear ở header. Recent: nhóm Today / Yesterday / Earlier; chạm mở đúng thư mục. Settings: tài khoản + Sign out, Theme (System / Light / Dark), dung lượng, phiên bản — không có mục thư mục tải về (dùng thư mục app / Files) và số luồng."
+    },
+    {
+      "id": "row-recent",
+      "x": 0,
+      "y": 5630,
+      "w": 640,
+      "text": "Upload thư mục: thả thư mục vào là tạo cây thư mục trên server (MKCOL) rồi đưa từng tệp vào hàng đợi; Transfers có thẻ tóm tắt cho cả thư mục (số tệp, dung lượng, Cancel all) phía trên các dòng tệp. Recent: mục mới ở sidebar, liệt kê tệp mới sửa trên toàn server lấy từ chỉ mục tìm kiếm, nhóm theo Hôm nay / Hôm qua / Tuần này; click mở đúng thư mục. Ghi nhớ thư mục cuối: mở lại app vào đúng server thì vào thẳng thư mục lần trước, không có UI riêng."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "desktop"
+  }
+}

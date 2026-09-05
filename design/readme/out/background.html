@@ -1,0 +1,152 @@
+<!doctype html><meta charset="utf-8"><style>
+@font-face { font-family: 'M'; src: url('file:///Volumes/Data/Labs/bstorage/frontend/node_modules/@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; }
+html { zoom: 2; }
+body { margin: 0; font-family: 'M', -apple-system, 'Helvetica Neue', sans-serif; font-size: 13px; line-height: 1.4; -webkit-font-smoothing: antialiased; }
+.mono { font-family: 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.stage { position: relative; overflow: hidden; }
+.light, .dark { position: absolute; inset: 0; }
+.light { background: #F6F5F1; }
+.light::after { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 70% at 22% 28%, rgba(46,100,200,0.10), transparent 70%); }
+.dark { background: #151412; }
+.dark::after { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 70% at 78% 72%, rgba(111,155,232,0.18), transparent 70%); }
+.grain { position: absolute; inset: 0; background-image: radial-gradient(rgba(27,26,23,0.08) 0.6px, transparent 0.6px); background-size: 6px 6px; opacity: 0.5; }
+.dark .grain { background-image: radial-gradient(rgba(236,234,228,0.10) 0.6px, transparent 0.6px); }
+.t { --bg:#F6F5F1; --surface:#FFFFFF; --surface-2:#EFEEE9; --border:#E6E4DE; --border-2:#D8D5CD; --text:#1B1A17; --text-2:#6E6A62; --text-3:#9B978E; --accent:#2E64C8; --accent-soft:#E4ECFA; --accent-text:#1F4F9E; --ok:#3B7A45; --fa:#DCE7F8; --fb:#C6D8F4; --fl:#3F6BB8; --primary:#171614; --on-primary:#fff; --shadow: 0 30px 80px rgba(27,26,23,0.22), 0 2px 6px rgba(27,26,23,0.08); color: var(--text); }
+.dark .t { --bg:#151412; --surface:#1C1B18; --surface-2:#252420; --border:#2C2B26; --border-2:#3A3832; --text:#ECEAE4; --text-2:#A19D94; --text-3:#726F67; --accent:#6F9BE8; --accent-soft:#1F2E4A; --accent-text:#A9C4F2; --ok:#7FC48A; --fa:#25355A; --fb:#2F457A; --fl:#7FA3E6; --primary:#ECEAE4; --on-primary:#151412; --shadow: 0 30px 80px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4); }
+.win { position: absolute; display: flex; overflow: hidden; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); border: 1px solid var(--border); }
+.side { width: 190px; flex: none; background: var(--bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 9px; border-radius: 6px; color: var(--text-2); }
+.row.on { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-weight: 500; }
+.cap { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding: 14px 18px 4px; }
+.hdr { height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 18px; border-bottom: 1px solid var(--border); }
+.btn { height: 28px; padding: 0 11px; border-radius: 6px; border: 1px solid var(--border-2); background: var(--surface); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; color: var(--text); }
+.btn.p { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.search { height: 28px; width: 190px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); display: flex; align-items: center; gap: 7px; padding: 0 9px; color: var(--text-3); font-size: 12px; }
+.card { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.card .name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .meta { font-size: 11px; color: var(--text-3); }
+.thumb { height: 74px; border-radius: 6px; }
+.bar { height: 5px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.panel { position: absolute; width: 380px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+.prow { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-top: 1px solid var(--border); }
+.menu { position: absolute; width: 250px; padding: 5px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border-2); box-shadow: var(--shadow); font-size: 13px; }
+.menu div { height: 24px; padding: 0 10px; display: flex; align-items: center; justify-content: space-between; border-radius: 5px; }
+.menu .dis { color: var(--text-3); }
+.menu .hl { background: #3478F6; color: #fff; }
+.menu .sep { height: 1px; margin: 5px 10px; padding: 0; background: var(--border-2); }
+.mark { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 26px; letter-spacing: -0.03em; }
+.eyebrow { position: absolute; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.tag { position: absolute; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.25; }
+</style>
+<div class="stage" style="width:900px;height:560px">
+  <div class="light"><div class="grain"></div><div style="position:absolute;left:0;top:0;width:450px;height:26px;background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);border-bottom:1px solid rgba(27,26,23,0.08);display:flex;align-items:center;gap:16px;padding:0 16px;font-size:13px;color:#1B1A17;font-family:-apple-system,'SF Pro Text',sans-serif"><span style="font-weight:600"></span><span style="font-weight:600">Finder</span><span>File</span><span>Edit</span><span>View</span><span style="flex:1"></span><span style="height:22px;padding:0 6px;border-radius:5px;background:rgba(27,26,23,0.12);display:inline-flex;align-items:center"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+</span><span>17:42</span></div>
+<div class="t menu" style="left:60px;top:104px">
+  <div class="dis" style="font-weight:600;color:var(--text)">kietle · 192.168.1.194</div>
+  <div class="sep"></div><div class="hl">Open Soteria</div><div class="sep"></div>
+  <div class="dis">3 transfers running</div><div>Open Transfers</div><div class="sep"></div>
+  <div>Show in Finder</div><div>Disconnect Drive</div><div class="sep"></div>
+  <div>Quit Soteria<span class="mono" style="color:var(--text-3);font-size:12px">⌘Q</span></div>
+</div>
+<div class="t menu" style="left:590px;top:250px">
+  <div class="dis" style="font-weight:600;color:var(--text)">kietle · 192.168.1.194</div>
+  <div class="sep"></div><div class="hl">Open Soteria</div><div class="sep"></div>
+  <div class="dis">3 transfers running</div><div>Open Transfers</div><div class="sep"></div>
+  <div>Show in File Explorer</div><div>Disconnect Drive</div><div class="sep"></div>
+  <div>Exit<span class="mono" style="color:var(--text-3);font-size:12px"></span></div>
+</div></div>
+  <div class="dark" style="clip-path:polygon(50% 0, 100% 0, 100% 100%, 50% 100%)"><div class="grain"></div><div style="position:absolute;left:0;bottom:0;width:900px;height:44px;background:rgba(28,28,30,0.9);border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:flex-start;padding-left:560px;gap:6px"><span style="width:16px;height:16px;display:grid;grid-template-columns:1fr 1fr;gap:2px"><span style="background:#5BA7F0;border-radius:1px"></span><span style="background:#5BA7F0;border-radius:1px"></span><span style="background:#5BA7F0;border-radius:1px"></span><span style="background:#5BA7F0;border-radius:1px"></span></span><span style="position:relative;width:36px;height:36px;border-radius:5px;background:rgba(255,255,255,0.1);display:inline-flex;align-items:center;justify-content:center"><svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+<span style="position:absolute;right:2px;bottom:2px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:#E5484D;color:#fff;font-size:10px;font-weight:600;display:inline-flex;align-items:center;justify-content:center">3</span></span><span style="position:absolute;right:16px;color:#E8E8E8;font-size:11px" class="mono">17:42</span><span style="position:absolute;right:70px;width:26px;height:26px;border-radius:4px;background:rgba(255,255,255,0.12);display:inline-flex;align-items:center;justify-content:center"><svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+</span></div>
+<div class="t menu" style="left:60px;top:104px">
+  <div class="dis" style="font-weight:600;color:var(--text)">kietle · 192.168.1.194</div>
+  <div class="sep"></div><div class="hl">Open Soteria</div><div class="sep"></div>
+  <div class="dis">3 transfers running</div><div>Open Transfers</div><div class="sep"></div>
+  <div>Show in Finder</div><div>Disconnect Drive</div><div class="sep"></div>
+  <div>Quit Soteria<span class="mono" style="color:var(--text-3);font-size:12px">⌘Q</span></div>
+</div>
+<div class="t menu" style="left:590px;top:250px">
+  <div class="dis" style="font-weight:600;color:var(--text)">kietle · 192.168.1.194</div>
+  <div class="sep"></div><div class="hl">Open Soteria</div><div class="sep"></div>
+  <div class="dis">3 transfers running</div><div>Open Transfers</div><div class="sep"></div>
+  <div>Show in File Explorer</div><div>Disconnect Drive</div><div class="sep"></div>
+  <div>Exit<span class="mono" style="color:var(--text-3);font-size:12px"></span></div>
+</div></div>
+  <div style="position:absolute;left:320px;top:250px"><svg width="260" height="260" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <!-- hind feet -->
+  <ellipse cx="98" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="142" cy="229" rx="19" ry="9.5" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <!-- body -->
+  <path d="M120 150c-38 0-56 28-56 48 0 16 25 26 56 26s56-10 56-26c0-20-18-48-56-48z" fill="#B39C74" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="202" rx="38" ry="22" fill="#F1E8D8"/>
+  <!-- ears: small, set on the side of the skull -->
+  <circle cx="62" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="62" cy="76" r="6.5" fill="#C9B48F"/>
+  <circle cx="178" cy="76" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="178" cy="76" r="6.5" fill="#C9B48F"/>
+  <!-- head + pouches, one outline -->
+  <path d="M120 48C154 48 178 64 184 90C188 104 180 106 180 130C180 154 158 178 120 178C82 178 60 154 60 130C60 106 52 104 56 90C62 64 86 48 120 48Z" fill="#C9B48F" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  
+  <ellipse cx="120" cy="136" rx="30" ry="19" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <path d="M91 102q9 8 18 0" fill="none" stroke="#1B1A17" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M131 102q9 8 18 0" fill="none" stroke="#1B1A17" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M120 124c7.2 0 11 3.4 11 7.4 0 4.4-5 8-11 8s-11-3.6-11-8c0-4 3.8-7.4 11-7.4z" fill="#1B1A17"/>
+  <path d="M120 137v7" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 151Q120 144 130 151" fill="none" stroke="#1B1A17" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <!-- forepaws + digging claws -->
+  <circle cx="78" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M71.7 205.1v6.3M78 206.9v6.3M84.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="162" cy="200" r="15" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M155.7 205.1v6.3M162 206.9v6.3M168.3 205.1v6.3" fill="none" stroke="#1B1A17" stroke-width="2" stroke-linecap="round"/>
+  <g fill="none" stroke="#3F6BB8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M192 46h13l-13 15h13"/>
+    <path d="M208 26h10l-10 11h10" opacity=".7"/>
+    <path d="M221 10h7l-7 8h7" opacity=".45"/>
+  </g>
+</svg>
+</div><div class="eyebrow" style="left:48px;top:48px;color:#6E6A62">Runs in the background</div>
+</div>
