@@ -13,6 +13,7 @@ import (
 
 	"github.com/wailsapp/wails/v3/pkg/application"
 	"github.com/wailsapp/wails/v3/pkg/services/notifications"
+	"github.com/wailsapp/wails/v3/pkg/updater"
 
 	"soteria/internal/app"
 	"soteria/internal/infra/shell"
@@ -95,6 +96,9 @@ func (a *App) trayMenu(n int) *application.Menu {
 	m.Add(head).SetEnabled(false)
 	m.AddSeparator()
 	m.Add("Open Soteria").OnClick(func(*application.Context) { a.show("") })
+	if application.Get().Updater.State() == updater.StateReady {
+		m.Add("Restart to update · " + a.UpdateStatus().Version).OnClick(func(*application.Context) { _ = a.RestartToUpdate() })
+	}
 	m.AddSeparator()
 	m.Add(xfer).SetEnabled(false)
 	m.Add("Open Transfers").OnClick(func(*application.Context) { a.show("/transfers") })

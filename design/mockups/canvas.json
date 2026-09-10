@@ -337,6 +337,78 @@
       "h": 960
     },
     {
+      "file": "UpdateDialog.dc.html",
+      "title": "Self-update · new version dialog",
+      "x": 0,
+      "y": 13440,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "UpdateReady.dc.html",
+      "title": "Self-update · ready to restart · sidebar pill · dark",
+      "x": 1380,
+      "y": 13440,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SettingsUpdates.dc.html",
+      "title": "Settings · Updates section",
+      "x": 2760,
+      "y": 13440,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "UpdateStates.dc.html",
+      "title": "Self-update · six dialog states · dark",
+      "x": 0,
+      "y": 14400,
+      "w": 1440,
+      "h": 800
+    },
+    {
+      "file": "UpdateBits.dc.html",
+      "title": "Self-update · settings states, menu bar, notification, behaviour · dark",
+      "x": 1540,
+      "y": 14400,
+      "w": 1280,
+      "h": 900
+    },
+    {
+      "file": "DragMove.dc.html",
+      "title": "Drag to move · folder onto folder",
+      "x": 0,
+      "y": 15360,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "FolderDetails.dc.html",
+      "title": "Folder details · size and item count",
+      "x": 1380,
+      "y": 15360,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "SettingsStartup.dc.html",
+      "title": "Settings · Startup",
+      "x": 2760,
+      "y": 15360,
+      "w": 1280,
+      "h": 800
+    },
+    {
+      "file": "DragMoveBits.dc.html",
+      "title": "Drag to move · targets, ghosts, toasts, platform matrix · dark",
+      "x": 0,
+      "y": 16320,
+      "w": 1280,
+      "h": 830
+    },
+    {
       "file": "MServers.dc.html",
       "title": "Servers",
       "x": 0,
@@ -599,6 +671,20 @@
       "y": 12350,
       "w": 760,
       "text": "Gói chạy nền: đóng cửa sổ không thoát app nữa, app sống trong menu bar (Mac) hoặc tray (Windows) để network drive không bị eject. Icon là Bo dạng nét đơn sắc, có chấm khi đang truyền, mờ khi offline. Menu native: header tên app + trạng thái kết nối + tài khoản, Open Soteria, dòng tiến độ transfers + Open Transfers, Show in Finder/File Explorer + Disconnect Drive (hoặc Connect Drive), Quit/Exit. Badge trên Dock và taskbar = số transfer đang chạy. Thông báo hệ thống một lần cho mỗi hàng đợi xong, chỉ khi cửa sổ đang ẩn hoặc app khác ở trước; lỗi thì báo số file và nút Retry; lần đầu ẩn cửa sổ có một thông báo nhắc app vẫn chạy. Settings thêm mục Background với hai công tắc; tắt thì đóng cửa sổ là thoát như hiện tại. Quit khi còn transfer hỏi xác nhận."
+    },
+    {
+      "id": "row-update",
+      "x": 0,
+      "y": 13310,
+      "w": 760,
+      "text": "Tự cập nhật: dùng khung updater có sẵn của Wails (pkg/updater + provider GitHub Releases), UI tự vẽ trong cửa sổ chính thay cho cửa sổ mặc định của Wails. Kiểm tra lúc mở app (sau 10 s) và mỗi 6 giờ, hoặc bấm Check for updates trong Settings / menu app; bản dev không kiểm tra. Có bản mới thì hiện dialog: phiên bản, dung lượng, ngày phát hành, ghi chú phát hành lấy từ GitHub, ba nút Skip this version / Later / Update now. Update now tải nền (thanh tiến độ, Hide để tiếp tục ngầm), xác minh SHA-256 theo SHA256SUMS.txt, rồi chuyển sang Ready: Restart & update thoát app, helper thay Soteria.app / Soteria.exe và mở lại; còn transfer đang chạy thì cảnh báo vàng. Later ở bước Ready để lại pill “Soteria 0.2.0 is ready · Restart” ở đáy sidebar và một dòng trong menu bar/tray; cửa sổ đang ẩn thì có thông báo hệ thống. Lỗi tải hay sai checksum: Try again hoặc Download from GitHub. Chạy từ DMG hoặc bản cài Program Files cũ không thay tại chỗ được → dẫn tới trang release. Settings thêm mục Updates: thẻ phiên bản + trạng thái và công tắc kiểm tra tự động. CI đổi tên asset thành Soteria-<v>-darwin-arm64 / darwin-amd64 / windows-amd64 (.zip) và cài Windows theo per-user để tự cập nhật không cần UAC."
+    },
+    {
+      "id": "row-dnd",
+      "x": 0,
+      "y": 15230,
+      "w": 760,
+      "text": "Gói kéo-thả và khởi động: (1) Kéo để di chuyển trong app — thư mục giờ kéo được ở cả hai nền tảng, thả lên thư mục khác (hàng, thẻ, hoặc breadcrumb) là MOVE, có ring accent và chữ \"Move here\"; từ chối thả lên chính nó, vào thư mục con của nó, hoặc lên thư mục nó đang nằm trong. Kéo hàng đang chọn thì lấy cả nhóm. Trùng tên: MOVE không ghi đè nên phần nào được thì chuyển, phần còn lại nêu tên trong một toast. Mỗi lần chuyển có toast Undo dùng lại cơ chế của Trash. Trên macOS tệp vẫn kéo ra Finder như cũ (một cử chỉ kéo native chỉ đi được một hướng), muốn chuyển tệp thì dùng ⌘X ⌘V hoặc \"Move to…\". (2) Kéo ra Explorer trên Windows: đường DownloadURL hiện tại không bao giờ tải được gì (asset server của Wails trên Windows không có socket thật, và DownloadURL chỉ mang một tệp), nên đổi thành di chuyển nội bộ + một toast trung thực chỉ sang Download hoặc network drive; toast chỉ hiện một lần mỗi phiên và chỉ khi kéo tệp (không phải thư mục) ra khỏi cửa sổ rồi thả không trúng gì; drop source OLE thật để lại đến khi có máy Windows. (3) Panel chi tiết: chọn thư mục giờ hiện panel, dòng phụ đọc \"Folder · 128 items · 1.4 GB\" và một dòng Contains, số liệu lấy từ chỉ mục tìm kiếm, chưa crawl thì ghi \"Not indexed yet\". (4) Settings thêm mục Startup: \"Open Soteria when you log in\" (Wails AutostartManager: SMAppService trên macOS 13+, HKCU Run trên Windows) và \"Reconnect to the last server\" — mục thứ hai là điều kiện để mở lúc đăng nhập có ý nghĩa, vì hiện tại mở app lên là về màn hình chọn server nên drive không tự nối lại. Tự nối lại chỉ chạy một lần mỗi lần mở app, nên \"Switch server…\" vẫn dùng được; lỗi kết nối có toast, chỉ trường hợp không có mật khẩu trong Keychain là im lặng."
     },
     {
       "id": "m-intro",

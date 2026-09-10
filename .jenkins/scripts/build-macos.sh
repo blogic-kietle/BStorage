@@ -7,11 +7,12 @@ label="intel"; [[ "$arch" == "arm64" ]] && label="apple-silicon"
 log "macOS $arch"
 rm -rf bin frontend/.svelte-kit # start clean: a half-finished SvelteKit build breaks the next one; svelte-kit sync recreates the folder
 keep_icons
-wails3 task darwin:build ARCH="$arch"
+wails3 task darwin:build ARCH="$arch" VERSION="$VERSION"
 restore_icons
 wails3 task darwin:create:app:bundle
 wails3 task darwin:create:dmg
 
 mkdir -p "$DIST"
 mv "bin/$APP.dmg" "$DIST/$APP-$VERSION-macOS-$label.dmg"
+ditto -c -k --keepParent "bin/$APP.app" "$DIST/$APP-$VERSION-darwin-$arch.zip" # what the in-app updater downloads
 ls -la "$DIST"

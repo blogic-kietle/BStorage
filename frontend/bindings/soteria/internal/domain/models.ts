@@ -78,3 +78,17 @@ export interface TrashItem {
     "from": string;
     "deleted": string;
 }
+
+/**
+ * Update is the self-update snapshot the frontend renders; State mirrors the Wails updater.
+ */
+export interface Update {
+    "current": string;
+    "state": string;
+    "blocked": boolean;
+    "version": string;
+    "notes": string;
+    "size": number;
+    "date": string;
+    "url": string;
+}

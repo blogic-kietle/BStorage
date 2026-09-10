@@ -71,3 +71,15 @@ type IndexStatus struct {
 	Done    bool  `json:"done"`
 	At      int64 `json:"at"`
 }
+
+// Update is the self-update snapshot the frontend renders; State mirrors the Wails updater.
+type Update struct {
+	Current string    `json:"current"`
+	State   string    `json:"state"`
+	Blocked bool      `json:"blocked"`
+	Version string    `json:"version"`
+	Notes   string    `json:"notes"`
+	Size    int64     `json:"size"`
+	Date    time.Time `json:"date"`
+	URL     string    `json:"url"`
+}

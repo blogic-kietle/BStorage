@@ -245,7 +245,7 @@ const sidebarGlyph = (open, dot = false) => `
 const sidebarToggle = (open, dot = false) =>
 	`<button type="button" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;border:0;background:transparent;color:var(--text-2);cursor:default;padding:0">${sidebarGlyph(open, dot)}</button>`;
 
-function sidebar({ nav = null, folder = null, gear = false, account = false, menu = false, toggle = false, win = false } = {}) {
+function sidebar({ nav = null, folder = null, gear = false, account = false, menu = false, toggle = false, win = false, update = '' } = {}) {
 	const item = (on, ic, label, h = 32) =>
 		`<div style="display:flex;align-items:center;gap:10px;height:${h}px;padding:0 10px;border-radius:6px;font-weight:${on ? 500 : 400};color:${on ? 'var(--text)' : 'var(--text-2)'};background:${on ? 'var(--surface)' : 'transparent'};border:1px solid ${on ? 'var(--border)' : 'transparent'}">${ic}<span class="trunc" style="flex:1">${label}</span></div>`;
 
@@ -272,7 +272,7 @@ ${account ? '' : `  <div style="padding:0 12px 12px">
   <div style="display:flex;flex-direction:column;gap:1px;padding:0 12px">
     ${FOLDERS.map((f) => item(folder === f, folderGlyph(16), f, 30)).join('')}
   </div>
-  <div style="flex:1"></div>
+  <div style="flex:1"></div>${update ? updatePill(update) : ''}
   <div style="padding:12px 16px 8px;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border)">
     <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">Storage</span><span class="mono" style="color:var(--text-3)">48.2 / 200 GB</span></div>
     ${segBar(6)}
@@ -600,6 +600,16 @@ const legend = (color, label, value) => `
   <span class="mono" style="color:var(--text-3)">${value}</span>
 </div>`;
 
+const accountCard = `
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:8px">
+          <span style="width:36px;height:36px;border-radius:8px;background:var(--surface-2);color:var(--text-2);display:inline-flex;align-items:center;justify-content:center;flex:none">${icon('server', 16)}</span>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+            <div style="font-weight:500">Lab SFTPGo</div>
+            <div class="trunc mono" style="font-size:12px;color:var(--text-3)">http://192.168.1.194:8081 · signed in as pos</div>
+          </div>
+          ${btn('Sign out', { ic: 'signOut' })}
+        </div>`;
+
 function settingsScreen({ dark = false } = {}) {
 	return doc(
 		`${sidebar({ gear: true })}
@@ -610,15 +620,7 @@ function settingsScreen({ dark = false } = {}) {
       ${settingsSection(
 				'Account',
 				'The server this window is signed in to.',
-				`
-        <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:8px">
-          <span style="width:36px;height:36px;border-radius:8px;background:var(--surface-2);color:var(--text-2);display:inline-flex;align-items:center;justify-content:center;flex:none">${icon('server', 16)}</span>
-          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
-            <div style="font-weight:500">Lab SFTPGo</div>
-            <div class="trunc mono" style="font-size:12px;color:var(--text-3)">http://192.168.1.194:8081 · signed in as pos</div>
-          </div>
-          ${btn('Sign out', { ic: 'signOut' })}
-        </div>`
+				accountCard
 			)}
       ${settingsSection('Appearance', 'Follows macOS by default.', settingRow('Theme', '', segmented(['System', 'Light', 'Dark'], 'System')))}
       ${settingsSection(
@@ -1310,10 +1312,10 @@ const uploadingPanel = () =>
 		footer: openTransfers() + btn('Cancel all', { h: 26 })
 	});
 
-const photosMain = (overlay = '', banner = '') => {
+const photosMain = (overlay = '', banner = '', side = {}) => {
 	const cols = 'minmax(0,1fr) 100px 170px 36px';
 	return `
-${sidebar({ folder: 'Product Photos' })}
+${sidebar({ folder: 'Product Photos', ...side })}
 <main style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--surface);position:relative">
   ${header({ crumbs: ['Files', 'Product Photos'], right: filesHeaderRight() })}
   ${banner}
@@ -1916,7 +1918,7 @@ const SEGOE = "'Segoe UI Variable','Segoe UI',system-ui,sans-serif";
 const glass = (pct) => `color-mix(in srgb, var(--surface) ${pct}%, transparent)`;
 
 // one menu spec, two native looks
-const trayRows = (state, win = false) => {
+const trayRows = (state, win = false, update = '') => {
 	const where = win ? 'File Explorer' : 'Finder';
 	const drive = state === 'nodrive' ? [{ k: 'item', t: 'Connect Drive' }] : [{ k: 'item', t: `Show in ${where}` }, { k: 'item', t: 'Disconnect Drive' }];
 	const xfer = { idle: 'No transfers', busy: 'Uploading 3 of 12 · 42%', nodrive: 'No transfers', offline: '2 transfers waiting' }[state];
@@ -1925,6 +1927,7 @@ const trayRows = (state, win = false) => {
 		{ k: 'sub', t: 'kietle · 192.168.1.194' },
 		{ k: 'sep' },
 		{ k: 'item', t: 'Open Soteria', hl: true },
+		...(update ? [{ k: 'item', t: update }] : []),
 		{ k: 'sep' },
 		{ k: 'info', t: xfer },
 		{ k: 'item', t: 'Open Transfers' },
@@ -2058,6 +2061,454 @@ function backgroundBitsSheet({ dark = true } = {}) {
   ${block('Behaviour', rules)}
 </div>`,
 		{ dark, root: 'display:block;', h: 960 }
+	);
+}
+
+// ---------------------------------------------------------------------------
+// Self-update: dialog states, Settings › Updates, sidebar pill, tray row
+// ---------------------------------------------------------------------------
+const boTile = (size, badge = '') => {
+	const mark = {
+		ok: ['var(--ok)', '<path d="M5 12.5l4.5 4.5L19 7"/>'],
+		danger: ['var(--danger)', '<path d="M12 6v8M12 18h.01"/>'],
+		warn: ['var(--warn)', '<path d="M12 6v8M12 18h.01"/>']
+	}[badge];
+	return `<span style="position:relative;width:${size}px;height:${size}px;border-radius:${Math.round(size * 0.24)}px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;flex:none">${bo(Math.round(size * 0.74))}${
+		mark
+			? `<span style="position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:9px;background:${mark[0]};border:2px solid var(--surface);display:inline-flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">${mark[1]}</svg></span>`
+			: ''
+	}</span>`;
+};
+
+const RELEASE_NOTES = [
+	'Soteria now updates itself from GitHub Releases',
+	'Windows: frameless window with macOS-style controls',
+	'A warning when storage passes 90%',
+	'Refresh shows progress instead of doing nothing'
+];
+
+const notesBox = () => `
+<div style="display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg)">
+  <div style="font-size:12px;font-weight:600">What’s new in 0.2.0</div>
+  <ul style="margin:0;padding:0 0 0 16px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--text-2);line-height:1.5">${RELEASE_NOTES.map((n) => `<li>${n}</li>`).join('')}</ul>
+  <a href="#" style="font-size:12px;display:inline-flex;align-items:center;gap:4px">Full release notes${icon('open', 12)}</a>
+</div>`;
+
+const callout = (tone, text) =>
+	`<div style="display:flex;gap:10px;padding:10px 12px;border-radius:6px;background:var(--${tone}-soft);color:var(--${tone});font-size:12px;line-height:1.5">${icon('info', 15, 'margin-top:1px')}<span>${text}</span></div>`;
+
+const dlProgress = (pct, text, right) => `
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden"><div style="width:${pct}%;height:100%;border-radius:3px;background:var(--accent)"></div></div>
+  <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">${text}</span><span class="mono" style="color:var(--text-3)">${right}</span></div>
+</div>`;
+
+const para = (t) => `<p style="margin:0;font-size:13px;color:var(--text-2);text-wrap:pretty">${t}</p>`;
+
+function updateCard(state, { xfers = 0, win = false } = {}) {
+	const left = (t) => `<span style="margin-right:auto">${btn(t, { kind: 'ghost' })}</span>`;
+	const s = {
+		available: {
+			title: 'Soteria 0.2.0 is available',
+			sub: 'You have 0.1.0 · 6.5 MB · Released Sep 6',
+			body: notesBox(),
+			foot: `${left('Skip this version')}${btn('Later')}${btn('Update now', { kind: 'primary' })}`
+		},
+		downloading: {
+			title: 'Downloading Soteria 0.2.0',
+			sub: 'You can keep working. Nothing changes until you restart.',
+			body: notesBox() + dlProgress(34, 'Downloading · 2.2 MB of 6.5 MB', '3.1 MB/s · 2 s left'),
+			foot: `${left('Cancel')}${btn('Hide')}`
+		},
+		ready: {
+			badge: 'ok',
+			title: 'Ready to update to 0.2.0',
+			sub: 'Downloaded and verified',
+			body: `${para('Soteria quits and reopens as 0.2.0. It takes a few seconds.')}${xfers ? callout('warn', `${xfers} transfers are still running. They stop when Soteria quits and can be retried from Transfers.`) : ''}`,
+			foot: `${btn('Later')}${btn('Restart & update', { kind: 'primary' })}`
+		},
+		error: {
+			badge: 'danger',
+			title: 'Couldn’t update to 0.2.0',
+			sub: 'Download failed',
+			body: callout('danger', 'The file didn’t match the checksum published with the release. Nothing on this Mac was changed.'),
+			foot: `${btn('Download from GitHub', { ic: 'open' })}${btn('Try again', { kind: 'primary' })}`
+		},
+		blocked: {
+			badge: 'warn',
+			title: 'Can’t update automatically here',
+			sub: 'Soteria 0.2.0 is available',
+			body: para(
+				win
+					? 'Soteria is installed in Program Files, which needs administrator rights to change. Download the new installer instead; future installs go to your user folder and update in place.'
+					: 'Soteria is running from the disk image, so it can’t replace itself. Drag it to Applications, open it from there and check again.'
+			),
+			foot: `${btn('Later')}${btn('Download 0.2.0', { kind: 'primary', ic: 'open' })}`
+		}
+	}[state];
+	return `
+<div style="width:440px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:14px;align-items:center">
+    ${boTile(44, s.badge)}
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">${s.title}</div>
+      <div style="font-size:12px;color:var(--text-2)">${s.sub}</div>
+    </div>
+  </div>
+  ${s.body}
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">${s.foot}</div>
+</div>`;
+}
+
+const updatePill = (v) => `
+<div style="margin:0 12px 6px;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:12px">
+  <span style="width:7px;height:7px;border-radius:4px;background:var(--ok);flex:none"></span>
+  <span class="trunc" style="flex:1;color:var(--text-2)">Soteria ${v} is ready</span>
+  <a href="#" style="font-weight:500">Restart</a>
+</div>`;
+
+const updateScreen = ({ dark = false, state = 'available', xfers = 0 } = {}) =>
+	doc(`${photosMain('', '', state === 'ready' ? { update: '0.2.0' } : {})}${scrim(updateCard(state, { xfers }))}`, {
+		dark,
+		root: 'display:flex;position:relative;'
+	});
+
+const updateStatus = (state) => {
+	const s = {
+		uptodate: ['var(--ok)', 'Up to date · checked 5 minutes ago', btn('Check for updates', { ic: 'refresh' })],
+		checking: ['var(--warn)', 'Checking…', `<span style="opacity:0.5">${btn('Check for updates', { ic: 'refresh' })}</span>`],
+		available: ['var(--accent)', '0.2.0 available · 6.5 MB', btn('Update…', { kind: 'primary' })],
+		ready: ['var(--ok)', '0.2.0 downloaded · restart to finish', btn('Restart & update', { kind: 'primary' })],
+		error: ['var(--danger)', 'Couldn’t check: api.github.com didn’t answer', btn('Try again', { ic: 'refresh' })],
+		dev: ['var(--border-2)', 'Development build · updates are off', '']
+	}[state];
+	const color = state === 'error' ? 'var(--danger)' : state === 'dev' ? 'var(--text-3)' : 'var(--text-2)';
+	return `
+<div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:8px">
+  ${boTile(36)}
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+    <div style="font-weight:500">Soteria 0.1.0</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:${color}"><span style="width:7px;height:7px;border-radius:4px;background:${s[0]};flex:none"></span><span class="trunc">${s[1]}</span></div>
+  </div>
+  ${s[2]}
+</div>`;
+};
+
+const updatesSection = (state) =>
+	settingsSection(
+		'Updates',
+		'New versions come from GitHub Releases and install in place.',
+		`${updateStatus(state)}
+     ${settingRow('Check for updates automatically', 'At launch and every 6 hours. Nothing installs without asking you.', toggle(true))}`
+	);
+
+function settingsUpdatesScreen({ dark = false, state = 'available' } = {}) {
+	return doc(
+		`${sidebar({ gear: true })}
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--surface)">
+  ${header({ title: 'Settings' })}
+  <div style="flex:1;min-height:0;overflow:hidden;padding:0 24px 20px">
+    <div style="max-width:720px;display:flex;flex-direction:column">
+      ${settingsSection('Account', 'The server this window is signed in to.', accountCard)}
+      ${driveSection('on')}
+      ${settingsSection(
+				'Background',
+				'What happens when you close the window.',
+				settingRow('Keep running in the background', 'Shows an icon in the menu bar so the network drive stays connected.', toggle(true)) +
+					settingRow('Notify when transfers finish', 'Only while Soteria is in the background.', toggle(true))
+			)}
+      ${updatesSection(state)}
+    </div>
+  </div>
+</main>`,
+		{ dark }
+	);
+}
+
+function updateStatesSheet({ dark = true } = {}) {
+	const block = (cap, inner) => `<div style="display:flex;flex-direction:column;gap:10px">${caption(cap)}${inner}</div>`;
+	return doc(
+		`<div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:32px;padding:28px;align-items:start">
+  ${block('1 · Update available', updateCard('available'))}
+  ${block('2 · Downloading · Hide keeps it going', updateCard('downloading'))}
+  ${block('3 · Ready · transfers still running', updateCard('ready', { xfers: 3 }))}
+  ${block('Checksum mismatch', updateCard('error'))}
+  ${block('macOS · running from the DMG', updateCard('blocked'))}
+  ${block('Windows · old Program Files install', updateCard('blocked', { win: true }))}
+</div>`,
+		{ dark, w: 1440, h: 800, root: 'display:block;' }
+	);
+}
+
+function updateBitsSheet({ dark = true } = {}) {
+	const block = (cap, inner) => `<div style="display:flex;flex-direction:column;gap:10px">${caption(cap)}${inner}</div>`;
+	const labeled = (inner, label) => `<div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">${inner}<div style="font-size:12px;color:var(--text-3)">${label}</div></div>`;
+	const states = `<div style="display:flex;flex-direction:column;gap:10px">${['uptodate', 'checking', 'available', 'ready', 'error', 'dev'].map(updateStatus).join('')}</div>`;
+	const rule = (k, v) => `<div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:96px;font-weight:500;color:var(--text-2)">${k}</span><span>${v}</span></div>`;
+	const rules = `<div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px 40px">
+  ${rule('Check', 'At launch and every 6 hours while running, plus “Check for updates” in Settings and in the app menu. Never on development builds.')}
+  ${rule('Source', 'GitHub Releases of this repo. One zip per platform: Soteria-&lt;v&gt;-darwin-arm64 / darwin-amd64 / windows-amd64, verified against SHA256SUMS.txt before anything is touched.')}
+  ${rule('Dialog', 'Appears once per new version while the window is open. Later = not again this launch. Skip this version = not until an even newer one.')}
+  ${rule('Download', 'Runs in the background; Hide keeps it going and the dialog comes back when it is ready. Nothing is installed until you choose Restart.')}
+  ${rule('Restart', 'Soteria quits, a helper swaps Soteria.app / Soteria.exe and reopens it. Running transfers stop after a warning; the drive is ejected like on any quit.')}
+  ${rule('Background', 'Window hidden: a system notification with Restart, and a “Restart to update” row in the menu bar or tray menu.')}
+  ${rule('Can’t update', 'Running from the DMG or an old Program Files install → link to the GitHub release instead. The Windows installer moves to per-user (no UAC) so in-place updates work.')}
+</div>`;
+	return doc(
+		`<div style="display:flex;flex-direction:column;gap:26px;padding:24px 32px">
+  <div style="display:grid;grid-template-columns:500px minmax(0,1fr);gap:40px;align-items:start">
+    ${block('Settings · Updates · six states', states)}
+    <div style="display:flex;flex-direction:column;gap:26px">
+      ${block('Menu bar · update ready', labeled(macMenu(trayRows('idle', false, 'Restart to update · 0.2.0')), 'Row appears only while an update is downloaded'))}
+      ${block('Notification · window hidden', macNotif('Soteria 0.2.0 is ready', 'Restart to finish updating.', 'Restart'))}
+      ${block('Sidebar · after “Later” on Ready', `<div style="width:240px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding-top:10px">${updatePill('0.2.0')}<div style="padding:12px 16px 12px;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border)"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">Storage</span><span class="mono" style="color:var(--text-3)">48.2 / 200 GB</span></div>${segBar(6)}</div></div>`)}
+    </div>
+  </div>
+  ${block('Behaviour', rules)}
+</div>`,
+		{ dark, root: 'display:block;', h: 900 }
+	);
+}
+
+// ---------------------------------------------------------------------------
+// Drag to move, folder totals, launch at login
+// ---------------------------------------------------------------------------
+
+// A folder card or row under the pointer during an internal drag.
+const dropRing = 'box-shadow:0 0 0 2px var(--accent) inset;background:var(--accent-soft);border-color:var(--accent)';
+
+const folderCardDrop = (name, meta, { over = false, dim = false, sel = false } = {}) => `
+<div style="display:flex;flex-direction:column;gap:14px;padding:14px;border:1px solid var(--border);border-radius:8px;background:var(--surface);${over ? dropRing : ''}${sel ? ';border-color:var(--accent);background:var(--accent-soft)' : ''};${dim ? 'opacity:0.4' : ''}">
+  ${folderGlyph(36)}
+  <div style="display:flex;flex-direction:column;gap:2px">
+    <div class="trunc" style="font-weight:500">${name}</div>
+    <div style="font-size:12px;color:${over ? 'var(--accent-text)' : 'var(--text-3)'}">${over ? 'Move here' : meta}</div>
+  </div>
+</div>`;
+
+const folderRowDrop = (name, meta, cols, { over = false, blocked = false } = {}) => `
+<div style="display:grid;grid-template-columns:${cols};align-items:center;gap:12px;height:44px;padding:0 8px 0 12px;border-top:1px solid var(--border);border-radius:6px;${over ? dropRing : 'border-color:var(--border)'}">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0">${folderGlyph(18)}<span class="trunc">${name}</span></div>
+  <div style="font-size:12px;color:var(--text-2);text-align:right">—</div>
+  <div style="font-size:12px;color:${over ? 'var(--accent-text)' : blocked ? 'var(--text-3)' : 'var(--text-2)'}">${over ? 'Move here' : blocked ? 'Already here' : meta}</div>
+  <div style="display:flex;justify-content:flex-end">${blocked ? icon('x', 15, 'color:var(--text-3)') : ''}</div>
+</div>`;
+
+// The item that follows the pointer: one row for a single item, a count badge for many.
+const dragGhost = (label, count = 0, { ic = null } = {}) => `
+<div style="display:inline-flex;align-items:center;gap:9px;padding:7px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--border-2);box-shadow:var(--shadow);font-size:13px">
+  ${ic ? icon(ic, 16, 'color:var(--text-2)') : folderGlyph(18)}
+  <span class="trunc" style="max-width:180px">${label}</span>
+  ${count ? `<span class="mono" style="min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--accent);color:#fff;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center">${count}</span>` : ''}
+</div>`;
+
+const crumbDrop = (over = false) => `
+<div style="display:flex;align-items:center;gap:8px;font-size:13px">
+  <span style="padding:3px 7px;border-radius:5px;${over ? 'background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent) inset;color:var(--accent-text);font-weight:500' : 'color:var(--text-2)'}">Files</span>
+  <span style="color:var(--text-3)">/</span>
+  <span style="color:var(--text)">Product Photos</span>
+</div>`;
+
+// Files screen mid-drag: the Logos folder is being dragged onto 2026-09.
+function dragMoveScreen({ dark = false } = {}) {
+	const cols = 'minmax(0,1fr) 90px 170px 36px';
+	return doc(
+		`${sidebar({ folder: 'Product Photos' })}
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--surface);position:relative">
+  <header style="height:52px;flex:none;display:flex;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid var(--border)">
+    ${crumbDrop()}
+    <div style="flex:1"></div>
+    ${filesHeaderRight()}
+  </header>
+  <div style="flex:1;min-height:0;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column;gap:28px">
+    <section style="display:flex;flex-direction:column;gap:12px">
+      ${sectionLabel('Folders', '4')}
+      <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:12px">
+        ${folderCardDrop('2026-08', '41 items · Aug 31')}
+        ${folderCardDrop('2026-09', '12 items · Sep 4', { over: true })}
+        ${folderCardDrop('Logos', '9 items · Jun 2', { dim: true })}
+        ${folderCardDrop('Menu Boards', '18 items · Aug 28')}
+      </div>
+    </section>
+    <section style="display:flex;flex-direction:column;gap:4px">
+      ${sectionLabel('Files', '6')}
+      <div style="display:flex;flex-direction:column">
+        ${tableHead(cols, false)}
+        ${PHOTO_FILES.map((f) => fileRow(f, cols, { kind: false })).join('')}
+      </div>
+    </section>
+  </div>
+  <div style="position:absolute;left:436px;top:196px">${dragGhost('Logos')}</div>
+</main>`,
+		{ dark, root: 'display:flex;position:relative;' }
+	);
+}
+
+function dragMoveBitsSheet({ dark = true } = {}) {
+	const block = (cap, inner) => `<div style="display:flex;flex-direction:column;gap:10px">${caption(cap)}${inner}</div>`;
+	const labeled = (inner, label) => `<div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">${inner}<div style="font-size:12px;color:var(--text-3)">${label}</div></div>`;
+	const cols = 'minmax(0,1fr) 90px 170px 36px';
+
+	const targets = `<div style="display:flex;flex-direction:column;gap:14px;width:520px">
+  ${labeled(`<div style="width:100%">${folderRowDrop('2026-09', '12 items · Sep 4', cols, { over: true })}</div>`, 'Row under the pointer · accent ring, “Move here”')}
+  ${labeled(`<div style="width:100%">${folderRowDrop('Product Photos', 'The folder you are in', cols, { blocked: true })}</div>`, 'Refused · the items already live here (no ring, no drop)')}
+  ${labeled(`<div style="display:flex;gap:12px;width:340px">${folderCardDrop('2026-09', '12 items', { over: true })}${folderCardDrop('Logos', 'Being dragged', { dim: true })}</div>`, 'Card view · same ring; the dragged folder dims')}
+  ${labeled(crumbDrop(true), 'Breadcrumb · drop to move up a level')}
+</div>`;
+
+	const ghosts = `<div style="display:flex;flex-direction:column;gap:14px">
+  ${labeled(dragGhost('Logos'), 'One folder')}
+  ${labeled(dragGhost('store-front.jpg', 0, { ic: 'image' }), 'One file · Windows only')}
+  ${labeled(dragGhost('store-front.jpg', 3, { ic: 'image' }), 'Whole selection · count badge')}
+</div>`;
+
+	const toasts = `<div style="display:flex;flex-direction:column;gap:10px">
+  ${toast('check', 'var(--ok)', 'Moved 3 items to /2026-09', 'Undo')}
+  ${toast('info', 'var(--danger)', 'Moved 2 items · “latte-art.jpg” already exists there', 'Show')}
+  ${toast('info', 'var(--warn)', 'Dragging files to Explorer isn’t supported yet. Use Download, or open the network drive.', 'Download')}
+</div>`;
+
+	const cell = (t, tone = 'var(--text)') => `<div style="padding:9px 12px;border-top:1px solid var(--border);color:${tone};font-size:12px">${t}</div>`;
+	const matrix = `<div style="display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1fr);width:640px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+  <div style="padding:9px 12px;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Drag</div>
+  <div style="padding:9px 12px;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">macOS</div>
+  <div style="padding:9px 12px;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Windows</div>
+  ${cell('A folder')}${cell('Move inside Soteria', 'var(--accent-text)')}${cell('Move inside Soteria', 'var(--accent-text)')}
+  ${cell('A file')}${cell('Out to Finder · unchanged')}${cell('Move inside Soteria', 'var(--accent-text)')}
+  ${cell('Out to the OS')}${cell('Drag the file · works today')}${cell('Not yet · Download or the drive', 'var(--warn)')}
+</div>`;
+
+	const rule = (k, v) => `<div style="display:flex;gap:10px;font-size:12px;line-height:1.45"><span style="flex:none;width:104px;font-weight:500;color:var(--text-2)">${k}</span><span>${v}</span></div>`;
+	const rules = `<div style="display:flex;flex-direction:column;gap:10px">
+  ${rule('Targets', 'Folder rows, folder cards and the breadcrumbs. Not files, not the empty area, not the sidebar.')}
+  ${rule('Refused', 'A folder onto itself, into its own subfolder, or anything onto the folder it already sits in. No ring appears and the drop does nothing.')}
+  ${rule('Selection', 'Dragging a selected row takes the whole selection; dragging an unselected row takes just that one.')}
+  ${rule('Collision', 'MOVE never overwrites. The items that fit are moved, the rest are named in one toast.')}
+  ${rule('Undo', 'Every move gets the same Undo toast that Trash already uses, for 6 seconds.')}
+  ${rule('Uploads', 'Dropping files from Finder or Explorer still uploads; that path is untouched.')}
+  ${rule('macOS files', 'A native file drag can only go one way, so a file keeps going out to Finder. Move it with ⌘X ⌘V or “Move to…”.')}
+  ${rule('Windows out', 'Today’s Windows drag-out never lands anything. It becomes an internal move, and the toast points at what works.')}
+</div>`;
+
+	return doc(
+		`<div style="display:flex;flex-direction:column;gap:26px;padding:24px 32px">
+  <div style="display:grid;grid-template-columns:520px 250px minmax(0,1fr);gap:32px;align-items:start">
+    ${block('Drop targets', targets)}
+    ${block('What follows the pointer', ghosts)}
+    ${block('Toasts', toasts)}
+  </div>
+  <div style="display:grid;grid-template-columns:640px minmax(0,1fr);gap:32px;align-items:start">
+    ${block('What a drag does', matrix)}
+    ${block('Behaviour', rules)}
+  </div>
+</div>`,
+		{ dark, root: 'display:block;', h: 830 }
+	);
+}
+
+// Details panel for a folder: the size and item count come from the search index.
+function folderDetailsScreen({ dark = false } = {}) {
+	const cols = 'minmax(0,1fr) 90px 160px 36px';
+	const panel = (known = true) => `
+<aside style="width:320px;flex:none;border-left:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+  <div style="height:180px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center">${folderGlyph(56)}</div>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em;word-break:break-all">2026-09</div>
+    <div style="font-size:12px;color:var(--text-2)">Folder · ${known ? '128 items · 1.4 GB' : '—'}</div>
+  </div>
+  ${btn('Download', { kind: 'primary', ic: 'download', full: true, h: 36 })}
+  <div style="display:flex;flex-direction:column">
+    ${metaRow('Modified', 'Sep 4, 2026 · 17:32')}
+    ${metaRow('Location', '/Product Photos', true)}
+    ${metaRow('Contains', known ? '116 files, 12 folders' : 'Not indexed yet')}
+  </div>
+  <div style="flex:1"></div>
+  <div style="display:flex;flex-direction:column;gap:2px;margin:0 -10px">
+    ${actionRow('link', 'Copy WebDAV URL')}
+    ${actionRow('pencil', 'Rename')}
+    ${actionRow('folderMove', 'Move to…')}
+    ${actionRow('trash', 'Move to Trash', true)}
+  </div>
+</aside>`;
+	return doc(
+		`${sidebar({ folder: 'Product Photos' })}
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--surface)">
+  ${header({ crumbs: ['Files', 'Product Photos'], right: filesHeaderRight() })}
+  <div style="flex:1;min-height:0;display:flex">
+    <div style="flex:1;min-width:0;padding:20px 24px;display:flex;flex-direction:column;gap:28px">
+      <section style="display:flex;flex-direction:column;gap:12px">
+        ${sectionLabel('Folders', '4')}
+        <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:12px">
+          ${folderCardDrop('2026-08', '41 items · Aug 31')}
+          ${folderCardDrop('2026-09', '12 items · Sep 4', { sel: true })}
+          ${folderCardDrop('Logos', '9 items · Jun 2')}
+          ${folderCardDrop('Menu Boards', '18 items · Aug 28')}
+        </div>
+      </section>
+      <section style="display:flex;flex-direction:column;gap:4px">
+        ${sectionLabel('Files', '6')}
+        <div style="display:flex;flex-direction:column">
+          ${tableHead(cols, false)}
+          ${PHOTO_FILES.map((f) => fileRow(f, cols, { kind: false })).join('')}
+        </div>
+      </section>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        ${caption('Before the first crawl lands')}
+        <div style="display:flex;flex-direction:column;gap:4px;width:300px;padding:12px 14px;border:1px dashed var(--border-2);border-radius:8px">
+          <div style="font-weight:500">2026-09</div>
+          <div style="font-size:12px;color:var(--text-2)">Folder · —</div>
+          <div style="font-size:12px;color:var(--text-3)">Contains · Not indexed yet</div>
+        </div>
+      </div>
+    </div>
+    ${panel()}
+  </div>
+</main>`,
+		{ dark }
+	);
+}
+
+const startupStatus = (state) => {
+	const s = {
+		off: ['var(--text-3)', 'The window still opens; macOS gives no way to start hidden.'],
+		on: ['var(--text-3)', 'The window still opens; macOS gives no way to start hidden.'],
+		error: ['var(--danger)', 'SMAppService register: the operation couldn’t be completed'],
+		dev: ['var(--danger)', 'launch at login needs an installed build']
+	}[state];
+	return `<div style="font-size:12px;color:${s[0]};text-wrap:pretty">${s[1]}</div>`;
+};
+
+const startupSection = (state = 'on') =>
+	settingsSection(
+		'Startup',
+		'What happens when you log in.',
+		settingRow('Open Soteria when you log in', startupStatus(state), toggle(state === 'on')) +
+			settingRow('Reconnect to the last server', 'Sign in again with the password in the Keychain, so the drive comes back on its own.', toggle(state === 'on'))
+	);
+
+function settingsStartupScreen({ dark = false } = {}) {
+	const block = (cap, inner) => `<div style="display:flex;flex-direction:column;gap:8px">${caption(cap)}${inner}</div>`;
+	return doc(
+		`${sidebar({ gear: true })}
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--surface)">
+  ${header({ title: 'Settings' })}
+  <div style="flex:1;min-height:0;overflow:hidden;padding:0 24px 20px">
+    <div style="max-width:720px;display:flex;flex-direction:column">
+      ${startupSection('on')}
+      ${settingsSection(
+				'Background',
+				'What happens when you close the window.',
+				settingRow('Keep running in the background', 'Shows an icon in the menu bar so the network drive stays connected.', toggle(true)) +
+					settingRow('Notify when transfers finish', 'Only while Soteria is in the background.', toggle(true))
+			)}
+      <div style="display:flex;gap:28px;padding:24px 0;border-top:1px solid var(--border)">
+        ${block('macOS refuses the login item', `<div style="width:330px">${startupStatus('error')}</div>`)}
+        ${block('wails3 dev', `<div style="width:300px">${startupStatus('dev')}</div>`)}
+      </div>
+    </div>
+  </div>
+</main>`,
+		{ dark }
 	);
 }
 
@@ -2476,6 +2927,15 @@ const files = {
 	'TrayMac.dc.html': trayMacScreen(),
 	'TrayWin.dc.html': trayWinScreen(),
 	'BackgroundBits.dc.html': backgroundBitsSheet(),
+	'UpdateDialog.dc.html': updateScreen(),
+	'UpdateReady.dc.html': updateScreen({ dark: true, state: 'ready', xfers: 3 }),
+	'SettingsUpdates.dc.html': settingsUpdatesScreen(),
+	'UpdateStates.dc.html': updateStatesSheet(),
+	'UpdateBits.dc.html': updateBitsSheet(),
+	'DragMove.dc.html': dragMoveScreen(),
+	'DragMoveBits.dc.html': dragMoveBitsSheet(),
+	'FolderDetails.dc.html': folderDetailsScreen(),
+	'SettingsStartup.dc.html': settingsStartupScreen(),
 	'MServers.dc.html': mServers(),
 	'MSignIn.dc.html': mSignIn(),
 	'MFiles.dc.html': mFiles(),
@@ -2548,6 +3008,15 @@ const canvas = {
 		{ file: 'TrayMac.dc.html', title: 'Background · macOS menu bar + Dock badge · dark', x: 0, y: Y(13), w: 1440, h: 900 },
 		{ file: 'TrayWin.dc.html', title: 'Background · Windows tray + taskbar badge · dark', x: 1540, y: Y(13), w: 1440, h: 900 },
 		{ file: 'BackgroundBits.dc.html', title: 'Background · menu states, notifications, settings, quit · dark', x: 3080, y: Y(13), w: W, h: 960 },
+		{ file: 'UpdateDialog.dc.html', title: 'Self-update · new version dialog', x: X(0), y: Y(14), w: W, h: H },
+		{ file: 'UpdateReady.dc.html', title: 'Self-update · ready to restart · sidebar pill · dark', x: X(1), y: Y(14), w: W, h: H },
+		{ file: 'SettingsUpdates.dc.html', title: 'Settings · Updates section', x: X(2), y: Y(14), w: W, h: H },
+		{ file: 'UpdateStates.dc.html', title: 'Self-update · six dialog states · dark', x: 0, y: Y(15), w: 1440, h: 800 },
+		{ file: 'UpdateBits.dc.html', title: 'Self-update · settings states, menu bar, notification, behaviour · dark', x: 1540, y: Y(15), w: W, h: 900 },
+		{ file: 'DragMove.dc.html', title: 'Drag to move · folder onto folder', x: X(0), y: Y(16), w: W, h: H },
+		{ file: 'FolderDetails.dc.html', title: 'Folder details · size and item count', x: X(1), y: Y(16), w: W, h: H },
+		{ file: 'SettingsStartup.dc.html', title: 'Settings · Startup', x: X(2), y: Y(16), w: W, h: H },
+		{ file: 'DragMoveBits.dc.html', title: 'Drag to move · targets, ghosts, toasts, platform matrix · dark', x: 0, y: Y(17), w: W, h: 830 },
 		mobile('MServers.dc.html', 'Servers', 0, 0),
 		mobile('MSignIn.dc.html', 'Add server', 1, 0),
 		mobile('MFiles.dc.html', 'Files · list', 2, 0),
@@ -2693,6 +3162,20 @@ const canvas = {
 			y: Y(13) - 130,
 			w: 760,
 			text: 'Gói chạy nền: đóng cửa sổ không thoát app nữa, app sống trong menu bar (Mac) hoặc tray (Windows) để network drive không bị eject. Icon là Bo dạng nét đơn sắc, có chấm khi đang truyền, mờ khi offline. Menu native: header tên app + trạng thái kết nối + tài khoản, Open Soteria, dòng tiến độ transfers + Open Transfers, Show in Finder/File Explorer + Disconnect Drive (hoặc Connect Drive), Quit/Exit. Badge trên Dock và taskbar = số transfer đang chạy. Thông báo hệ thống một lần cho mỗi hàng đợi xong, chỉ khi cửa sổ đang ẩn hoặc app khác ở trước; lỗi thì báo số file và nút Retry; lần đầu ẩn cửa sổ có một thông báo nhắc app vẫn chạy. Settings thêm mục Background với hai công tắc; tắt thì đóng cửa sổ là thoát như hiện tại. Quit khi còn transfer hỏi xác nhận.'
+		},
+		{
+			id: 'row-update',
+			x: 0,
+			y: Y(14) - 130,
+			w: 760,
+			text: 'Tự cập nhật: dùng khung updater có sẵn của Wails (pkg/updater + provider GitHub Releases), UI tự vẽ trong cửa sổ chính thay cho cửa sổ mặc định của Wails. Kiểm tra lúc mở app (sau 10 s) và mỗi 6 giờ, hoặc bấm Check for updates trong Settings / menu app; bản dev không kiểm tra. Có bản mới thì hiện dialog: phiên bản, dung lượng, ngày phát hành, ghi chú phát hành lấy từ GitHub, ba nút Skip this version / Later / Update now. Update now tải nền (thanh tiến độ, Hide để tiếp tục ngầm), xác minh SHA-256 theo SHA256SUMS.txt, rồi chuyển sang Ready: Restart & update thoát app, helper thay Soteria.app / Soteria.exe và mở lại; còn transfer đang chạy thì cảnh báo vàng. Later ở bước Ready để lại pill “Soteria 0.2.0 is ready · Restart” ở đáy sidebar và một dòng trong menu bar/tray; cửa sổ đang ẩn thì có thông báo hệ thống. Lỗi tải hay sai checksum: Try again hoặc Download from GitHub. Chạy từ DMG hoặc bản cài Program Files cũ không thay tại chỗ được → dẫn tới trang release. Settings thêm mục Updates: thẻ phiên bản + trạng thái và công tắc kiểm tra tự động. CI đổi tên asset thành Soteria-<v>-darwin-arm64 / darwin-amd64 / windows-amd64 (.zip) và cài Windows theo per-user để tự cập nhật không cần UAC.'
+		},
+		{
+			id: 'row-dnd',
+			x: 0,
+			y: Y(16) - 130,
+			w: 760,
+			text: 'Gói kéo-thả và khởi động: (1) Kéo để di chuyển trong app — thư mục giờ kéo được ở cả hai nền tảng, thả lên thư mục khác (hàng, thẻ, hoặc breadcrumb) là MOVE, có ring accent và chữ "Move here"; từ chối thả lên chính nó, vào thư mục con của nó, hoặc lên thư mục nó đang nằm trong. Kéo hàng đang chọn thì lấy cả nhóm. Trùng tên: MOVE không ghi đè nên phần nào được thì chuyển, phần còn lại nêu tên trong một toast. Mỗi lần chuyển có toast Undo dùng lại cơ chế của Trash. Trên macOS tệp vẫn kéo ra Finder như cũ (một cử chỉ kéo native chỉ đi được một hướng), muốn chuyển tệp thì dùng ⌘X ⌘V hoặc "Move to…". (2) Kéo ra Explorer trên Windows: đường DownloadURL hiện tại không bao giờ tải được gì (asset server của Wails trên Windows không có socket thật, và DownloadURL chỉ mang một tệp), nên đổi thành di chuyển nội bộ + một toast trung thực chỉ sang Download hoặc network drive; toast chỉ hiện một lần mỗi phiên và chỉ khi kéo tệp (không phải thư mục) ra khỏi cửa sổ rồi thả không trúng gì; drop source OLE thật để lại đến khi có máy Windows. (3) Panel chi tiết: chọn thư mục giờ hiện panel, dòng phụ đọc "Folder · 128 items · 1.4 GB" và một dòng Contains, số liệu lấy từ chỉ mục tìm kiếm, chưa crawl thì ghi "Not indexed yet". (4) Settings thêm mục Startup: "Open Soteria when you log in" (Wails AutostartManager: SMAppService trên macOS 13+, HKCU Run trên Windows) và "Reconnect to the last server" — mục thứ hai là điều kiện để mở lúc đăng nhập có ý nghĩa, vì hiện tại mở app lên là về màn hình chọn server nên drive không tự nối lại. Tự nối lại chỉ chạy một lần mỗi lần mở app, nên "Switch server…" vẫn dùng được; lỗi kết nối có toast, chỉ trường hợp không có mật khẩu trong Keychain là im lặng.'
 		},
 		{
 			id: 'm-intro',

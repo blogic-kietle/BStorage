@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #F6F5F1; }
+.app {
+  font-family: 'Geist', -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  --bg: #F6F5F1; --surface: #FFFFFF; --surface-2: #EFEEE9;
+  --border: #E6E4DE; --border-2: #D8D5CD;
+  --text: #1B1A17; --text-2: #6E6A62; --text-3: #9B978E;
+  --primary: #171614; --on-primary: #FFFFFF;
+  --accent: #2E64C8; --accent-soft: #E4ECFA; --accent-text: #1F4F9E;
+  --ok: #3B7A45; --ok-soft: #E6F1E7;
+  --warn: #956400; --warn-soft: #FBF3DB;
+  --danger: #B3362F; --danger-soft: #FBE9E7; --on-danger: #FFFFFF;
+  --folder-a: #DCE7F8; --folder-b: #C6D8F4; --folder-line: #3F6BB8;
+  --seg-1: #9DB9EA; --seg-2: #9FCBA6; --seg-3: #E8CD82; --seg-4: #C9C6BE;
+  --shadow: 0 8px 24px rgba(27, 26, 23, 0.08);
+}
+.app[data-theme="dark"] {
+  --bg: #151412; --surface: #1C1B18; --surface-2: #252420;
+  --border: #2C2B26; --border-2: #3A3832;
+  --text: #ECEAE4; --text-2: #A19D94; --text-3: #726F67;
+  --primary: #ECEAE4; --on-primary: #151412;
+  --accent: #6F9BE8; --accent-soft: #1F2E4A; --accent-text: #A9C4F2;
+  --ok: #7FC48A; --ok-soft: #1D3122;
+  --warn: #E0B25A; --warn-soft: #382E16;
+  --danger: #E27A72; --danger-soft: #3A201E; --on-danger: #1A0F0E;
+  --folder-a: #25355A; --folder-b: #2F457A; --folder-line: #7FA3E6;
+  --seg-1: #4F76BF; --seg-2: #4E8C5A; --seg-3: #A88A3A; --seg-4: #5A5850;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mono { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { display: block; }
+.trunc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+kbd { font-family: 'Geist Mono', 'SF Mono', Menlo, monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; background: var(--surface-2); color: var(--text-3); }
+</style>
+</helmet>
+<div class="app" data-theme="{{theme}}" style="width:1440px;height:800px;overflow:hidden;background:var(--bg);color:var(--text);display:block;">
+<div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:32px;padding:28px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">1 · Update available</div>
+<div style="width:440px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:14px;align-items:center">
+    <span style="position:relative;width:44px;height:44px;border-radius:11px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;flex:none"><svg width="33" height="33" xmlns="http://www.w3.org/2000/svg" viewBox="20 32 200 200">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+</span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Soteria 0.2.0 is available</div>
+      <div style="font-size:12px;color:var(--text-2)">You have 0.1.0 · 6.5 MB · Released Sep 6</div>
+    </div>
+  </div>
+  
+<div style="display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg)">
+  <div style="font-size:12px;font-weight:600">What’s new in 0.2.0</div>
+  <ul style="margin:0;padding:0 0 0 16px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--text-2);line-height:1.5"><li>Soteria now updates itself from GitHub Releases</li><li>Windows: frameless window with macOS-style controls</li><li>A warning when storage passes 90%</li><li>Refresh shows progress instead of doing nothing</li></ul>
+  <a href="#" style="font-size:12px;display:inline-flex;align-items:center;gap:4px">Full release notes<span class="ico" style="width:12px;height:12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span></a>
+</div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px"><span style="margin-right:auto"><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:transparent;color:var(--text-2);border:1px solid transparent;"><span>Skip this version</span></button></span><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--surface);color:var(--text);border:1px solid var(--border-2);"><span>Later</span></button><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);"><span>Update now</span></button></div>
+</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">2 · Downloading · Hide keeps it going</div>
+<div style="width:440px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:14px;align-items:center">
+    <span style="position:relative;width:44px;height:44px;border-radius:11px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;flex:none"><svg width="33" height="33" xmlns="http://www.w3.org/2000/svg" viewBox="20 32 200 200">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+</span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Downloading Soteria 0.2.0</div>
+      <div style="font-size:12px;color:var(--text-2)">You can keep working. Nothing changes until you restart.</div>
+    </div>
+  </div>
+  
+<div style="display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg)">
+  <div style="font-size:12px;font-weight:600">What’s new in 0.2.0</div>
+  <ul style="margin:0;padding:0 0 0 16px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--text-2);line-height:1.5"><li>Soteria now updates itself from GitHub Releases</li><li>Windows: frameless window with macOS-style controls</li><li>A warning when storage passes 90%</li><li>Refresh shows progress instead of doing nothing</li></ul>
+  <a href="#" style="font-size:12px;display:inline-flex;align-items:center;gap:4px">Full release notes<span class="ico" style="width:12px;height:12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span></a>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div style="height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden"><div style="width:34%;height:100%;border-radius:3px;background:var(--accent)"></div></div>
+  <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">Downloading · 2.2 MB of 6.5 MB</span><span class="mono" style="color:var(--text-3)">3.1 MB/s · 2 s left</span></div>
+</div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px"><span style="margin-right:auto"><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:transparent;color:var(--text-2);border:1px solid transparent;"><span>Cancel</span></button></span><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--surface);color:var(--text);border:1px solid var(--border-2);"><span>Hide</span></button></div>
+</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">3 · Ready · transfers still running</div>
+<div style="width:440px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:14px;align-items:center">
+    <span style="position:relative;width:44px;height:44px;border-radius:11px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;flex:none"><svg width="33" height="33" xmlns="http://www.w3.org/2000/svg" viewBox="20 32 200 200">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+<span style="position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:9px;background:var(--ok);border:2px solid var(--surface);display:inline-flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Ready to update to 0.2.0</div>
+      <div style="font-size:12px;color:var(--text-2)">Downloaded and verified</div>
+    </div>
+  </div>
+  <p style="margin:0;font-size:13px;color:var(--text-2);text-wrap:pretty">Soteria quits and reopens as 0.2.0. It takes a few seconds.</p><div style="display:flex;gap:10px;padding:10px 12px;border-radius:6px;background:var(--warn-soft);color:var(--warn);font-size:12px;line-height:1.5"><span class="ico" style="width:15px;height:15px;margin-top:1px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg></span><span>3 transfers are still running. They stop when Soteria quits and can be retried from Transfers.</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px"><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--surface);color:var(--text);border:1px solid var(--border-2);"><span>Later</span></button><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);"><span>Restart & update</span></button></div>
+</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Checksum mismatch</div>
+<div style="width:440px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:14px;align-items:center">
+    <span style="position:relative;width:44px;height:44px;border-radius:11px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;flex:none"><svg width="33" height="33" xmlns="http://www.w3.org/2000/svg" viewBox="20 32 200 200">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+<span style="position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:9px;background:var(--danger);border:2px solid var(--surface);display:inline-flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v8M12 18h.01"/></svg></span></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Couldn’t update to 0.2.0</div>
+      <div style="font-size:12px;color:var(--text-2)">Download failed</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;padding:10px 12px;border-radius:6px;background:var(--danger-soft);color:var(--danger);font-size:12px;line-height:1.5"><span class="ico" style="width:15px;height:15px;margin-top:1px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg></span><span>The file didn’t match the checksum published with the release. Nothing on this Mac was changed.</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px"><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--surface);color:var(--text);border:1px solid var(--border-2);"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span><span>Download from GitHub</span></button><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);"><span>Try again</span></button></div>
+</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">macOS · running from the DMG</div>
+<div style="width:440px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:14px;align-items:center">
+    <span style="position:relative;width:44px;height:44px;border-radius:11px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;flex:none"><svg width="33" height="33" xmlns="http://www.w3.org/2000/svg" viewBox="20 32 200 200">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+<span style="position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:9px;background:var(--warn);border:2px solid var(--surface);display:inline-flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v8M12 18h.01"/></svg></span></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Can’t update automatically here</div>
+      <div style="font-size:12px;color:var(--text-2)">Soteria 0.2.0 is available</div>
+    </div>
+  </div>
+  <p style="margin:0;font-size:13px;color:var(--text-2);text-wrap:pretty">Soteria is running from the disk image, so it can’t replace itself. Drag it to Applications, open it from there and check again.</p>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px"><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--surface);color:var(--text);border:1px solid var(--border-2);"><span>Later</span></button><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span><span>Download 0.2.0</span></button></div>
+</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Windows · old Program Files install</div>
+<div style="width:440px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:14px;align-items:center">
+    <span style="position:relative;width:44px;height:44px;border-radius:11px;background:var(--surface-2);display:inline-flex;align-items:center;justify-content:center;flex:none"><svg width="33" height="33" xmlns="http://www.w3.org/2000/svg" viewBox="20 32 200 200">
+  <path d="M30 66a14 14 0 0 1 14-14h38l14 18h100a14 14 0 0 1 14 14v114a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#DCE7F8" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="72" cy="102" r="9" fill="#C9B48F"/>
+  <circle cx="168" cy="102" r="21" fill="#8E7A57" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="168" cy="102" r="9" fill="#C9B48F"/>
+  <path d="M30 104h180v94a14 14 0 0 1-14 14H44a14 14 0 0 1-14-14z" fill="#C6D8F4" stroke="#1B1A17" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="180" rx="28" ry="17" fill="#F1E8D8" stroke="#1B1A17" stroke-width="2.4"/>
+  <ellipse cx="88" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="91.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <ellipse cx="152" cy="146" rx="10" ry="12" fill="#1B1A17"/>
+  <circle cx="155.6" cy="141.4" r="3.6" fill="#FFFFFF"/>
+  <path d="M120 165c6.6 0 10 3.2 10 7 0 4.2-4.6 7.4-10 7.4s-10-3.2-10-7.4c0-3.8 3.4-7 10-7z" fill="#1B1A17"/>
+  <path d="M109 190Q120 183 131 190" fill="none" stroke="#1B1A17" stroke-width="2.6" stroke-linecap="round"/>
+</svg>
+<span style="position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:9px;background:var(--warn);border:2px solid var(--surface);display:inline-flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v8M12 18h.01"/></svg></span></span>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Can’t update automatically here</div>
+      <div style="font-size:12px;color:var(--text-2)">Soteria 0.2.0 is available</div>
+    </div>
+  </div>
+  <p style="margin:0;font-size:13px;color:var(--text-2);text-wrap:pretty">Soteria is installed in Program Files, which needs administrator rights to change. Download the new installer instead; future installs go to your user folder and update in place.</p>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px"><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--surface);color:var(--text);border:1px solid var(--border-2);"><span>Later</span></button><button type="button" style="height:32px;padding:0 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:default;background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);"><span class="ico" style="width:15px;height:15px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span><span>Download 0.2.0</span></button></div>
+</div></div>
+</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":true,"section":"Theme"},"$preview":{"width":1440,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark;
+    if (dark === undefined || dark === null) dark = true;
+    return { theme: dark ? 'dark' : 'light' };
+  }
+}
+</script>
+</body>
+</html>
